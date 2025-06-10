@@ -1,41 +1,44 @@
 body {
     min-height: 100vh;
     margin: 0;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    font-family: 'Montserrat', Arial, sans-serif;
     background: #f8f8fa;
     position: relative;
-    overflow: hidden;
+    overflow-x: hidden;
+    color: #222;
+    padding-bottom: 0;
+    padding-top: 110px; /* espace pour le header */
+    display: flex;
+    flex-direction: column;
 }
+
 .background-circle {
     position: absolute;
     top: 50%;
     left: 50%;
     width: 600px;
     height: 600px;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -55%);
     background: radial-gradient(circle at 60% 40%, rgb(201,41,128), rgb(247,130,52), rgb(172,30,163));
     border-radius: 50%;
-    z-index: 1;
-    filter: blur(0px);
-}
-.blurred-overlay {
+    z-index: 0;
+    filter: blur(45px);
+    pointer-events: none;
 
+}
+
+.global-blur-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
     background: rgba(255,255,255,0.7);
-    z-index: 2;
-    backdrop-filter: blur(30px);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    backdrop-filter: blur(60px);
+    z-index: 1; /* sous le header/footer, au-dessus du background-circle */
+    pointer-events: none;
 }
+
 .content {
     z-index: 3;
     position: relative;
@@ -43,54 +46,21 @@ body {
 }
 
 .title-section {
-    width: 100vw;
-    margin: 0;
-    padding: 60px 0 40px 0;
-    background: #fff;
-    border-radius: 0;
-    box-shadow: none;
+    position: relative;
+    width: 100%;
+    padding: 4rem 0 2rem 0;
+    margin-top:70px;
+    margin-bottom: 80px;
+    z-index: 2;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
-    overflow: hidden;
-}
-
-.title-section.justified-flex {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 3rem;
-    padding: 60px 0 40px 0;
-    background: #fff;
-    border-radius: 0;
-    box-shadow: none;
-    width: 100vw;
-    margin: 0;
-    position: relative;
-    overflow: hidden;
-}
-
-.title-section.justified-flex .content {
-    flex: 1 1 0;
-    text-align: justify;
-    max-width: 600px;
-    z-index: 1;
-}
-
-.title-section.justified-flex .main-title {
-    text-align: justify;
-    margin-bottom: 1.2rem;
-}
-
-.title-section.justified-flex .dj-section-text {
-    text-align: justify;
-    margin-bottom: 1.5rem;
+    overflow: hidden; /* pour cacher le cercle en dehors du titre */
 }
 
 .main-title {
     margin: 0 auto 1.5rem auto;
-    font-size: 2.5rem;
+    font-size: 3.2rem;
     font-weight: 800;
     text-align: center;
     letter-spacing: -1px;
@@ -116,53 +86,43 @@ body {
 
 .main-content-white {
     background: #fff;
-    width: 100vw;
-    margin: 0;
-    padding: 0;
-    box-shadow: none;
-    min-height: unset;
-    border-radius: 0;
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    min-height: calc(100vh - 110px - 120px); /* header + footer height */
+    box-shadow: 0 0 32px 0 rgba(201,41,128,0.04);
+    padding-top: 2rem;
+    padding-bottom: 0; /* retire le padding si tu veux coller au footer */
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
 }
 
 .cards-row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
     gap: 2rem;
-    justify-items: center;
-    align-items: stretch;
-    margin: 0;
-    padding: 80px 0;
-    width: 100vw;
-    background: none;
-    z-index: 2; /* Modifié */
+    justify-content: center;
+    margin-top: 0;
+    z-index: 2;
     position: relative;
+    background: none; /* retire le fond blanc ici */
+    padding: 20px;
 }
 
 .gradient-card {
-    border-radius: 32px;
-    background: linear-gradient(90deg, rgb(201,41,128), rgb(247,130,52), rgb(172,30,163));
-    padding: 3px;
-    box-shadow: 0 4px 24px 0 rgba(201,41,128,0.08);
-    width: 100%;
-    max-width: 320px;
-    min-width: 240px;
-    min-height: 180px;
-    box-sizing: border-box;
-    z-index: 2; /* Modifié */
-    position: relative;
-}
-
-.gradient-card-inner {
     background: #fff;
-    border-radius: 29px;
+    border-radius: rem;
+    border: 3px solid;
+    border-image: linear-gradient(90deg, rgb(201,41,128), rgb(247,130,52), rgb(172,30,163)) 1;
+    box-shadow: 0 4px 24px 0 rgba(201,41,128,0.08);
     padding: 2rem 1.5rem;
+    min-width: 240px;
+    max-width: 320px;
+    flex: 1 1 0;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    height: 100%;
-    box-sizing: border-box;
+    transition: box-shadow 0.2s;
 }
 
 .gradient-card h2 {
@@ -180,21 +140,7 @@ body {
 }
 
 .gradient-card:hover {
-    box-shadow: 0 12px 36px 0 rgba(201,41,128,0.18);
-    transform: scale(1.07);
-    z-index: 2; /* Modifié */
-}
-
-.dj-image {
-    max-width: 340px;
-    width: 100%;
-    height: auto;
-    border-radius: 32px;
-    background: linear-gradient(90deg, rgb(201,41,128), rgb(247,130,52), rgb(172,30,163));
-    padding: 3px;
-    box-shadow: 0 4px 24px 0 rgba(201,41,128,0.08);
-    display: block;
-    /* Pour effet "carte" similaire aux cards */
+    box-shadow: 0 8px 32px 0 rgba(201,41,128,0.13);
 }
 
 .main-footer {
@@ -206,29 +152,6 @@ body {
     flex-shrink: 0;
 }
 
-.refresh-timer {
-    width: 100%;
-    text-align: right;
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 10px;
-    padding-right: 2vw; /* Remplace margin-right */
-    background: linear-gradient(90deg, rgb(201,41,128) 0%, rgb(247,130,52) 50%, rgb(172,30,163) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-fill-color: transparent;
-    display: block;
-    letter-spacing: 0.5px;
-    z-index: 2;
-}
-.refresh-timer #timer {
-    font-weight: bold;
-    -webkit-text-fill-color: #222;
-    text-fill-color: #222;
-    background: none;
-}
-
 @media (max-width: 600px) {
     .main-title {
         font-size: 2rem;
@@ -237,118 +160,13 @@ body {
 }
 
 @media (max-width: 900px) {
+    .cards-row {
+        flex-direction: column;
+        gap: 1.5rem;
+        align-items: center;
+    }
     .gradient-card {
         width: 90%;
         max-width: 400px;
     }
-}
-
-/* 2 cartes ou moins : 1 ou 2 colonnes */
-@media (max-width: 1200px) {
-    .cards-row {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-/* Téléphones : 1 carte par ligne */
-@media (max-width: 700px) {
-    .cards-row {
-        grid-template-columns: 1fr;
-        gap: 1.2rem;
-        padding: 40px 0;
-    }
-    .gradient-card {
-        max-width: 95vw;
-        min-width: 0;
-    }
-}
-
-.concert-section {
-    position: relative;
-    width: 100vw;
-    min-height: 400px;
-    max-height: 60vh;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
-    /*margin-top: 100px;*/
-    padding-top:300px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    background: #000;
-    z-index: 1; /* Ajoute ceci */
-}
-
-.concert-gif {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    object-fit: cover;
-    z-index: 1;
-}
-
-.concert-blur {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    z-index: 2;
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-}
-
-.concert-overlay {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(180deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.75) 100%);
-    z-index: 3;
-    pointer-events: none;
-}
-
-.concert-content {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 4;
-    text-align: center;
-    font-size: 1.5rem;
-    color: #fff;
-    max-width: 900px;
-    width: 90vw;
-    padding: 3rem 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.concert-title {
-    font-size: 2.5rem;
-    font-weight: 800;
-    line-height: 1.15;
-    margin-bottom: 1.2rem;
-    color: #fff;
-}
-
-.concert-title .gradient-text {
-    background: linear-gradient(90deg, rgb(201,41,128) 0%, rgb(247,130,52) 50%, rgb(172,30,163) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-fill-color: transparent;
-    filter: drop-shadow(0 2px 8px rgba(201,41,128,0.13));
-}
-
-.concert-desc {
-    font-size: 1.1rem;
-    font-weight: 400;
-    color: #fff;
-    opacity: 0.92;
-    margin-bottom: 0;
-}
-
-@media (max-width: 700px) {
-    .concert-title { font-size: 1.4rem; }
-    .concert-content { padding: 2rem 0.5rem; }
-
 }
