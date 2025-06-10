@@ -1,6 +1,7 @@
 <div class="container container-sign-up">
     <div class="sign-up">
-        <h1 style="">Inscription</h1>
+        <div class="background-circle"></div>
+        <h1 style="color:rgb(172,30,163)">Inscription</h1>
         <p class="required required-signup">*Ces champs sont obligatoires</p>
 
         <?php if (!empty($errors)) : ?>
@@ -16,6 +17,7 @@
         <?php endif; ?>
 
         <form action="" class="form sign-up-form" method="post" id="myForm">
+
             <div class="form-row">
                 <!-- first-name --->
                 <div class="form-control">
@@ -48,7 +50,7 @@
             <div class="form-control">
                 <label for="password" id="passwordLabel">Mot de passe<span class="required">* </span><i class="fa-solid fa-circle-question" id="passwordInfo"></i></label>
                 <input id="password" type="password" placeholder="Votre mot de passe..." required name="motDePasse">
-                <span class="tooltip" id="password-tooltip">
+                <span class="tooltip" id="password-tooltip" style="display: none;">
                     Le mot de passe doit contenir :
                     <ul>
                       <li>Au moins 8 caractères</li>
@@ -92,5 +94,42 @@
         </div>
     </div>
 </div>
+<style>
+body {
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f8fa;
+    position: relative;
+    overflow: hidden;
+}
+.background-circle {
+    position: absolute;
+    top: 10%;
+    left: 5%;
+    width: 300px;
+    height: 300px;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle at 60% 40%, rgb(201,41,128), rgb(247,130,52), rgb(172,30,163));
+    border-radius: 50%;
+    z-index: 1;
+    filter: blur(8px);
+}
 
-
+.container-sign-up {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    }
+input {
+border: 1px solid red;
+    border-radius: 5px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.form-control {
+    padding: 4%;
+}
+</style>
