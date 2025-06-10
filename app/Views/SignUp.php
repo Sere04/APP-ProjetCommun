@@ -88,7 +88,7 @@
         </form>
 
         <div class="button go-login-button">
-            <button class="button go-to-login-button" onclick="window.location.href = 'log-in.php';">Se connecter</button>
+            <button class="button go-to-login-button" onclick="window.location.href = 'SignUpModele.php';">Se connecter</button>
         </div>
     </div>
 </div>
