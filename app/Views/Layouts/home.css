@@ -1,41 +1,172 @@
 body {
     min-height: 100vh;
     margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    font-family: 'Montserrat', Arial, sans-serif;
     background: #f8f8fa;
     position: relative;
-    overflow: hidden;
+    overflow-x: hidden;
+    color: #222;
+    padding-bottom: 0;
+    padding-top: 110px; /* espace pour le header */
+    display: flex;
+    flex-direction: column;
 }
+
 .background-circle {
     position: absolute;
     top: 50%;
     left: 50%;
     width: 600px;
     height: 600px;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -55%);
     background: radial-gradient(circle at 60% 40%, rgb(201,41,128), rgb(247,130,52), rgb(172,30,163));
     border-radius: 50%;
-    z-index: 1;
-    filter: blur(0px);
+    z-index: 0;
+    filter: blur(45px);
+    pointer-events: none;
+
 }
-.blurred-overlay {
+
+.global-blur-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
     background: rgba(255,255,255,0.7);
-    z-index: 2;
-    backdrop-filter: blur(30px);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    backdrop-filter: blur(60px);
+    z-index: 1; /* sous le header/footer, au-dessus du background-circle */
+    pointer-events: none;
 }
+
 .content {
     z-index: 3;
     position: relative;
     text-align: center;
+}
+
+.title-section {
+    position: relative;
+    width: 100%;
+    padding: 4rem 0 2rem 0;
+    margin-top:70px;
+    margin-bottom: 80px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* pour cacher le cercle en dehors du titre */
+}
+
+.main-title {
+    margin: 0 auto 1.5rem auto;
+    font-size: 3.2rem;
+    font-weight: 800;
+    text-align: center;
+    letter-spacing: -1px;
+    color: #222;
+    line-height: 1.1;
+    text-shadow: 0 4px 24px rgba(201,41,128,0.10), 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.gradient-text {
+    background: linear-gradient(90deg, rgb(201,41,128) 0%, rgb(247,130,52) 50%, rgb(172,30,163) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+    filter: drop-shadow(0 2px 8px rgba(201,41,128,0.13));
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 auto;
+}
+
+.main-content-white {
+    background: #fff;
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    min-height: calc(100vh - 110px - 120px); /* header + footer height */
+    box-shadow: 0 0 32px 0 rgba(201,41,128,0.04);
+    padding-top: 2rem;
+    padding-bottom: 0; /* retire le padding si tu veux coller au footer */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.cards-row {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    margin-top: 0;
+    z-index: 2;
+    position: relative;
+    background: none; /* retire le fond blanc ici */
+    padding: 20px;
+}
+
+.gradient-card {
+    background: #fff;
+    border-radius: rem;
+    border: 3px solid;
+    border-image: linear-gradient(90deg, rgb(201,41,128), rgb(247,130,52), rgb(172,30,163)) 1;
+    box-shadow: 0 4px 24px 0 rgba(201,41,128,0.08);
+    padding: 2rem 1.5rem;
+    min-width: 240px;
+    max-width: 320px;
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    transition: box-shadow 0.2s;
+}
+
+.gradient-card h2 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #222;
+}
+
+.gradient-card p {
+    margin: 0;
+    color: #444;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.gradient-card:hover {
+    box-shadow: 0 8px 32px 0 rgba(201,41,128,0.13);
+}
+
+.main-footer {
+    z-index: 10;
+    position: relative;
+}
+
+#footer, .main-footer {
+    flex-shrink: 0;
+}
+
+@media (max-width: 600px) {
+    .main-title {
+        font-size: 2rem;
+        margin-top: 40px;
+    }
+}
+
+@media (max-width: 900px) {
+    .cards-row {
+        flex-direction: column;
+        gap: 1.5rem;
+        align-items: center;
+    }
+    .gradient-card {
+        width: 90%;
+        max-width: 400px;
+    }
 }
