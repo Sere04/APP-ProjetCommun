@@ -20,9 +20,8 @@ if (isset($_SESSION['account'])) {
      header("Location: index.php");
 }
 
-require_once 'modele/user/insertUser.php';
-require_once 'modele/user/checkCredentials.php';
-require_once 'modele/user/getUser.php';
+require_once 'Models/SignUpModele.php';
+require_once 'Controllers/Check_SignUp.php';
 
 $nom = $email = $telephone = $prenom = $motDePasse = $pseudonyme = "";
 
@@ -34,8 +33,6 @@ if (isset($_POST) && count($_POST) > 0) {
     $pseudonyme = test_input($_POST["pseudonyme"]);
     $email = test_input($_POST["email"]);
     $telephone = test_input($_POST["telephone"]);
-    $description = test_input($_POST["description"]);
-    $role = isset($_POST['makerCheckbox']) && $_POST['makerCheckbox'] === 'on' ? 'vendeur' : 'acheteur'; // est set si la case est cochée
 
     $validateEmail = validateEmail($email);
     $validateEmailUnique = uniqueMail($email);
@@ -80,17 +77,17 @@ if (isset($_POST) && count($_POST) > 0) {
         $errors['ConfirmdPassword'] = "Les mots de passe ne correspondent pas";
     }
 
-    if (empty($_POST['is18More'])) {
-        $errors['checkbox1'] = "Veullez confirmer d'avoir plus de 18 ans";
-    }
+    // if (empty($_POST['is18More'])) {
+    //     $errors['checkbox1'] = "Veullez confirmer d'avoir plus de 18 ans";
+    // }
 
-    if (empty($_POST['AcceptCGU'])) {
-        $errors['checkbox2'] = "Veullez accepter les CGU.";
-    }
+    // if (empty($_POST['AcceptCGU'])) {
+    //     $errors['checkbox2'] = "Veullez accepter les CGU.";
+    // }
 
-    if (empty($_POST['AcceptCGPS'])) {
-        $errors['checkbox3'] = "Veullez accepter les CGPS";
-    }
+    // if (empty($_POST['AcceptCGPS'])) {
+    //     $errors['checkbox3'] = "Veullez accepter les CGPS";
+    // }
     if (!isset($_POST['prenom'])) {
         $errors['prenom'] = "Le champ est obligatoire";
     }
@@ -108,50 +105,50 @@ if (isset($_POST) && count($_POST) > 0) {
     if (empty($errors)) {
         if ($validateEmail && $validatePhone && $validatePassword) {
             $hashedPassword = hashPassword($motDePasse);
-            $token = bin2hex(random_bytes(16));
-            $result = insertUser($nom, $prenom, $pseudonyme, $email, $hashedPassword, $telephone, $description, $role, $token);
+            //$token = bin2hex(random_bytes(16));
+            $result = insertUser($nom, $prenom, $pseudonyme, $email, $hashedPassword, $telephone);
 
-            $to = $email;
-            $validationLink = "https://www.makerhub.fr/validate.php?token=$token";
-            $from = "no-reply@makerhub.fr";
-            $subject = "[MakerHub] Confirmation d'inscription";
-            $message = "
-                <html>
-                    <head>
-                        <title>Inscription</title>
-                    </head>
+            // $to = $email;
+            // $validationLink = "https://www.makerhub.fr/validate.php?token=$token";
+            // $from = "no-reply@makerhub.fr";
+            // $subject = "[MakerHub] Confirmation d'inscription";
+            // $message = "
+            //     <html>
+            //         <head>
+            //             <title>Inscription</title>
+            //         </head>
         
-                    <body>
-                        <h1>Confirmez votre inscription</h1><br>
-                        <button><a href=\"" . $validationLink . "\">Confirmez</a></button><br><br>
-                        <p>Cliquez sur le lien pour confirmer votre mail: <a href=\"" . $validationLink . "\">ici</a>.</p><br><br>
-                        <p>Merci de votre confiance.</p><br>
-                        <p>L'équipe de MakerHub.</p>
-                    </body>
-                </html>
-                ";
+            //         <body>
+            //             <h1>Confirmez votre inscription</h1><br>
+            //             <button><a href=\"" . $validationLink . "\">Confirmez</a></button><br><br>
+            //             <p>Cliquez sur le lien pour confirmer votre mail: <a href=\"" . $validationLink . "\">ici</a>.</p><br><br>
+            //             <p>Merci de votre confiance.</p><br>
+            //             <p>L'équipe de MakerHub.</p>
+            //         </body>
+            //     </html>
+            //     ";
 
-            $headers = "From: " . $from . "\r\n" .
-                "Content-Type: text/html; charset=UTF-8\r\n" .
-                "MIME-Version: 1.0\r\n";
+            // $headers = "From: " . $from . "\r\n" .
+            //     "Content-Type: text/html; charset=UTF-8\r\n" .
+            //     "MIME-Version: 1.0\r\n";
 
-            if (mail($to, $subject, $message, $headers)) {
-                echo '<script>alert("Email sent successfully !")</script>';
-            } else {
-                echo "Failed to send email.";
-            }
+            // if (mail($to, $subject, $message, $headers)) {
+            //     echo '<script>alert("Email sent successfully !")</script>';
+            // } else {
+            //     echo "Failed to send email.";
+            // }
 
             $account = getUser($email);
 
-            $logFile->addLog(new Log(LogLevel::INFO, "L'utilisateur " . $account['pseudonyme'] . " (id: " . $account["id_utilisateur"] . ") a été créé depuis " . $_SERVER['REMOTE_ADDR'] . "."));
+            //$logFile->addLog(new Log(LogLevel::INFO, "L'utilisateur " . $account['pseudonyme'] . " (id: " . $account["id_utilisateur"] . ") a été créé depuis " . $_SERVER['REMOTE_ADDR'] . "."));
             header("Location: index.php");
         }
     }
 }
 
 
-include_once 'views/sign-up.html';
+include_once 'Views/SignUp.html';
 
 $body = ob_get_clean();
 
-include_once 'view/components/template.php';
+include_once 'Views/components/template.php';

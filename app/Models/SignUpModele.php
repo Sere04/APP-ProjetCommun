@@ -13,14 +13,12 @@ require_once(__DIR__ . '/../connectToDB.php');
  * @param string $token
  * @return int|null
  */
-function insertUser(string $nom, string $prenom, string $pseudonyme, string $email, string $hashedPassword, string $telephone, string $description, string $role, string $token): ?int
+function insertUser(string $prenom, string $nom, string $email, string $pseudonyme, string $hashedPassword, string $telephone): ?int
 {
     try {
         $pdo = connectToDB();
-        $sql = "INSERT INTO utilisateur (nom, prenom, pseudonyme, mail, mot_de_passe, description, telephone, token, is_verified, role_id)
-            (select :nom, :prenom, :pseudonyme, :email, :motDePasse, :description, :telephone, :valToken, 0, id_role
-             from role
-             where nom = :role)";
+        $sql = "INSERT INTO User (firstName, lastName, mailUser, userName, motDePasse, phoneNumber)
+            (select :prenom, :nom, :email, :pseudonyme, :motDePasse, :telephone)";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
             ':nom' => $nom,
@@ -28,10 +26,7 @@ function insertUser(string $nom, string $prenom, string $pseudonyme, string $ema
             ':pseudonyme' => $pseudonyme,
             ':email' => $email,
             ':motDePasse' => $hashedPassword,
-            ':description' =>$description,
             ':telephone' => $telephone,
-            ':role' => $role,
-            ':valToken' => $token
         ]);
 
         $stmt->closeCursor();
@@ -48,7 +43,7 @@ function verifyUsername(string $pseudonyme): ?bool
 {
     try {
         $pdo = connectToDB();
-        $sql = "SELECT * FROM `utilisateur` WHERE pseudonyme=:valUsername";
+        $sql = "SELECT * FROM `User` WHERE userName=:valUsername";
 
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(":valUsername", $pseudonyme);
@@ -70,7 +65,7 @@ function verifyMail(string $email): ?bool
 {
     try {
         $pdo = connectToDB();
-        $sql = "SELECT * FROM `utilisateur` WHERE mail=:valMail";
+        $sql = "SELECT * FROM `User` WHERE mailUser=:valMail";
 
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(":valMail", $email);
