@@ -1,17 +1,7 @@
-
 <?php $title ??= "Accueil"; ?>
 
-<?php if (isset($_SESSION['account'])) {
-    $username = $_SESSION['account']['pseudonyme'];
-} else {
-    $username = null;
-} ?>
+<?php include_once __DIR__ . "/header.html"; ?>
 
-<?php include_once "header.html"; ?>
+<?= $body ?>
 
-<?=
-/** @var $body string whole body */
-$body
-?>
-
-<?php include_once "footer.html"; ?>
+<?php include_once __DIR__ . "/footer.html"; ?>
