@@ -1,6 +1,6 @@
 
 <?php
-require_once('insertUser.php');
+require_once('SignUpModele.php');
 
 if (!empty($_POST)) {
     if (isset($_POST['fonction'])) {
