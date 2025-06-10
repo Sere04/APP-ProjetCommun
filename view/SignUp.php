@@ -69,16 +69,7 @@
                 <span class="eye-span signup-eye">
                 <i class="fa-solid fa-eye" aria-hidden="true"  type="button" id="eye1"></i>
             </div>
-            <label class="toggle">
-                <input type="checkbox" class="toggle-input" id="toggleDescription" name="makerCheckbox">
-                <span class="toggle-label"></span>
-                Vous possédez une imprimante 3D et souhaitez proposer vos services.
-            </label>
-            <div class="form-control" id="aboutMe">
-                <label for="description">À propos de vous</label>
-                <textarea id="description" name="description" rows="4" maxlength="255"></textarea>
-            </div>
-            <div class="checkbox-group">
+            <!-- <div class="checkbox-group">
                 <input class="checkbox" type="checkbox" id="check" name="is18More">
                 <label>En cochant cette case, vous confirmez avoir plus de 18 ans<span class="required">*</span></label>
             </div>
@@ -89,7 +80,7 @@
             <div class="checkbox-group">
                 <input class="checkbox" type="checkbox"id="check2" name="AcceptCGPS">
                 <label>En cochant cette case, vous confirmez avoir lu les <a href="cgps.php">CGPS</a><span class="required">*</span></label>
-            </div>
+            </div> -->
             <!-- submit --->
             <div class="button signup-button">
                 <input type="submit" class="btn submit" value="S'inscrire" id="submitForm"/>
@@ -101,14 +92,4 @@
         </div>
     </div>
 </div>
-<style>
-    .tooltip { /*si je deplace dans style.css il le lit plus*/
-      display: none;
-      position: absolute;
-      background-color: #f9f9f9;
-      border: 1px solid #ccc;
-      padding: 10px;
-      border-radius: 5px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    }
-  </style>
+
