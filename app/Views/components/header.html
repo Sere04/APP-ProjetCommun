@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    
+    <link href="./assets/css/style.css" rel="stylesheet">
+
+    <link href="./assets/images/favico.ico" rel="icon">
+    <title><?= $title ?> | Makerhub</title>
+</head>
+
+<body>
+<div class="navbar">
+    <a href="index.php">
+        <div class="header-logo">
+            <img alt="Logo MakerHUB" class="img-logo" src="./assets/images/logo.svg">
+        </div>
+    </a>
+
+    <?php if (isset($username)) : ?>
+
+    <div class="profil" id="profil">
+        <?php if ($_SESSION['role'] === 'acheteur') : ?>
+        <a href="shopping-cart.php">
+            <img alt="Panier" class="img-shopping-cart" src="./assets/images/shopping-cart.svg">
+        </a>
+        <?php endif; ?>
+
+        <img alt="Photo de profil" class="img-profil" src="./assets/images/profil.svg">
+        <p id="pseudo"><?= $username ?></p>
+
+        <div id="dropdown">
+            <?php if ($_SESSION['role'] == 'acheteur') : ?>
+            <a href="order-history.php"><div class="drop-content">Mes commandes</div></a>
+            <a href="devis-history.php"><div class="drop-content">Mes devis</div></a>
+
+            <a href="edit-profile.php"><div class="drop-content">Éditer le profil</div></a>
+            <hr id="separation-bar">
+            <?php elseif($_SESSION['role'] == 'vendeur'): ?>
+            <a href="devis-history.php"><div class="drop-content">Mes devis</div></a>
+
+            <a href="edit-profile.php"><div class="drop-content">Éditer le profil</div></a>
+            <hr id="separation-bar">
+            <?php endif; ?>
+            <a href="log-out.php"><div class="drop-content logout">Se déconnecter</div></a>
+        </div>
+    </div>
+
+    <?php elseif (!isset($username) && !isset($isAuthPage)) : ?>
+
+    <div class="auth">
+        <button class="button button-login" onclick="location.href = 'log-in.php'">
+            Se connecter
+        </button>
+        <button class="button button-signup" onclick="location.href = 'sign-up.php'">
+            S'inscrire
+        </button>
+    </div>
+
+    <?php endif; ?>
+</div>
