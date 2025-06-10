@@ -1,6 +1,6 @@
 <div class="container container-sign-up">
     <div class="sign-up">
-        <h1>Inscription</h1>
+        <h1 style="">Inscription</h1>
         <p class="required required-signup">*Ces champs sont obligatoires</p>
 
         <?php if (!empty($errors)) : ?>
@@ -92,4 +92,5 @@
         </div>
     </div>
 </div>
+
 
