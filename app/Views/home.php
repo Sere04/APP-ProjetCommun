@@ -16,6 +16,58 @@
 <body>
     <div id="header"></div>
     <div class="main-content">
+        <div class="main-content-white">
+            <section class="concert-section">
+                <img src="/APP-PROJETCOMMUN/app/Views/Assets/img/concert.gif" alt="Concert" class="concert-gif">
+                <div class="concert-blur"></div>
+                <div class="concert-overlay"></div>
+                <div class="concert-content">
+                    <h2 class="concert-title">
+                        Vivez vos évènements dans la plus <span class="gradient-text">high tech</span> des salles de concerts
+                    </h2>
+                    <p class="concert-desc">Lorem Ipsum</p>
+                </div>
+            </section>
+
+            <section class="cards-row">
+                <div class="gradient-card">
+                    <div class="gradient-card-inner">
+                        <h2>Sécurité</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                    </div>
+                </div>
+                <div class="gradient-card">
+                    <div class="gradient-card-inner">
+                        <h2>Sécurité</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                    </div>
+                </div>
+                <div class="gradient-card">
+                    <div class="gradient-card-inner">
+                        <h2>Sécurité</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                    </div>
+                </div>
+                <div class="gradient-card">
+                    <div class="gradient-card-inner">
+                        <h2>Sécurité</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                    </div>
+                </div>
+                <div class="gradient-card">
+                    <div class="gradient-card-inner">
+                        <h2>Sécurité</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                    </div>
+                </div>
+                <div class="gradient-card">
+                    <div class="gradient-card-inner">
+                        <h2>Sécurité</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                    </div>
+                </div>
+            </section>
+        
         <section class="title-section">
             <div class="background-circle"></div>
             <div class="global-blur-overlay"></div>
@@ -26,23 +78,8 @@
                 <p>Effet de profondeur avec dégradé et flou.</p>
             </div>
         </section>
-        <div class="main-content-white">
-            <section class="cards-row">
-                <div class="gradient-card">
-                    <h2>Sécurité</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                </div>
-                <div class="gradient-card">
-                    <h2>Sécurité</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                </div>
-                <div class="gradient-card">
-                    <h2>Sécurité</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                </div>
-            </section>
-            <!-- Ajoute ici d'autres sections si besoin -->
         </div>
+        
     </div>
     <div id="footer"></div>
     <script type="module">
