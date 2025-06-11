@@ -3,7 +3,7 @@ export function renderFooter() {
     <link rel="stylesheet" href="/app/Views/components/footer.css">
     <footer class="main-footer glass-effect">
         <div class="footer-logo">
-            <img src="/app/Views/Assets/img/logo.png" alt="Icône MakerHUB">
+            <img src="/APP-ProjetCommun/app/Views/Assets/img/logo.png" alt="Icône PulseZone">
         </div>
         <div class="footer-infos">
             <p>MakerHUB</p>
