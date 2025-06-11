@@ -3,7 +3,7 @@ export function renderHeader() {
     <link rel="stylesheet" href="/app/Views/components/header.css">
     <header class="main-header">
         <div class="header-logo">
-            <img src="/app/Views/Assets/img/logo.png" alt="Logo MakerHUB" class="img-logo">
+            <img src="/APP-ProjetCommun/app/Views/Assets/img/logo.png" alt="Logo PulseZone">
         </div>
         <nav class="main-nav">
             <a href="/" class="nav-link">Accueil</a>
@@ -12,7 +12,11 @@ export function renderHeader() {
             <a href="#" class="nav-link">Blog</a>
             <a href="#" class="nav-link">Contact</a>
         </nav>
-        <div class="header-spacer"></div>
     </header>
+    <script>
+        document.querySelectorAll('.nav-link').forEach((link, i) => {
+            link.style.animationDelay = \`\${0.3 + i * 0.15}s\`;
+        });
+    </script>
     `;
 }
