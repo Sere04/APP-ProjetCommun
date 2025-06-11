@@ -3,17 +3,10 @@
 
 <div class="container container-sign-up">
     <div class="sign-up">
-        <h1>Mot de passe oublié</h1>
-        <p class="form-description">Saisissez votre email. Si un compte existe, nous enverrons un lien pour réinitialiser votre mot de passe.</p>
-
-        <?php if (!empty($successMessage)) : ?>
-            <div class="success-message">
-                <?= $successMessage ?>
-            </div>
-        <?php endif; ?>
+        <h1>Connexion</h1>
 
         <?php if (!empty($errors)) : ?>
-            <div class="error-container">
+            <div class="error-container" style="margin-bottom: 1rem;">
                 <?php foreach ($errors as $error): ?>
                     <div class="wrong-signup">
                         <?= $error ?>
@@ -22,27 +15,34 @@
             </div>
         <?php endif; ?>
 
-        <?php if (empty($successMessage)) : ?>
-            <form action="" class="form sign-up-form" method="post" id="forgotPasswordForm">
-                
-                <div class="form-control">
-                    <label for="email">Adresse email<span class="required">*</span></label>
-                    <input type="email" id="email" placeholder="Votre email..." name="email" required>
-                </div>
-                
-                <div class="button-group" style="margin-top: 1.5rem;">
-                    <div class="button signup-button">
-                        <input type="submit" class="btn submit" value="Envoyer le lien"/>
-                    </div>
-                </div>
-            </form>
-        <?php endif; ?>
-        
-        <div class="button-group" style="margin-top: 1rem;">
-            <div class="button go-login-button">
-                 <button type="button" class="button go-to-login-button" onclick="window.location.href = 'LogIn.php';">Retour à la connexion</button>
+        <form action="" class="form sign-up-form" method="post" id="loginForm">
+            
+            <div class="form-control">
+                <label for="emailOrUsername">Email ou Pseudonyme<span class="required">*</span></label>
+                <input type="text" id="emailOrUsername" placeholder="Votre email ou pseudo..." name="emailOrUsername" required>
             </div>
-        </div>
+
+            <div class="form-control">
+                <label for="password">Mot de passe<span class="required">*</span></label>
+                <input id="password" type="password" placeholder="Votre mot de passe..." required name="password">
+                <span class="eye-span signup-eye">
+                    <i class="fa-solid fa-eye" aria-hidden="true" type="button" id="eye-login"></i>
+                </span>
+            </div>
+            
+            <div class="forgot-password-link">
+                <a href="ForgotPassword.php">Mot de passe oublié ?</a>
+            </div>
+            
+            <div class="button-group" style="margin-top: 1.5rem;">
+                <div class="button signup-button">
+                    <input type="submit" class="btn submit" value="Se connecter"/>
+                </div>
+                <div class="button go-login-button">
+                    <button type="button" class="button go-to-login-button" onclick="window.location.href = 'signUp.php';">Créer un compte</button>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
 
@@ -63,7 +63,6 @@
 
     .background-circle {
         position: absolute;
-
         width: 500px;
         height: 500px;
         top: -15%;
@@ -103,21 +102,14 @@
 
     .sign-up h1 {
         text-align: center;
-        font-size: clamp(1.6rem, 5vw, 2rem);
+        font-size: clamp(1.8rem, 5vw, 2.2rem);
         font-weight: 700;
-        margin: 0 0 0.5rem 0;
-        background: linear-gradient(90deg, rgb(201,41,128) 0%, rgb(247,130,52) 50%, rgb(172,30,163) 100%);
+        margin: 0 0 1.5rem 0;
+        background: linear-gradient(90deg, rgb(201,41,128) 0%, rgb(247,130,52) 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
         text-fill-color: transparent;
-    }
-    
-    .form-description {
-        text-align: center;
-        font-size: 0.95rem;
-        color: #555;
-        margin-bottom: 1.5rem;
     }
 
     .sign-up-form {
@@ -160,6 +152,34 @@
         border-color: rgb(201, 41, 128);
         box-shadow: 0 0 0 3px rgba(201, 41, 128, 0.2);
     }
+    
+    .eye-span {
+        position: absolute;
+        right: 1rem;
+        top: 65%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #888;
+    }
+
+    .forgot-password-link {
+        text-align: right;
+        margin-top: -0.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .forgot-password-link a {
+        color: #555;
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 600;
+        transition: color 0.3s;
+    }
+
+    .forgot-password-link a:hover {
+        color: rgb(201, 41, 128);
+        text-decoration: underline;
+    }
 
     .button-group {
         margin-top: 1rem;
@@ -198,22 +218,12 @@
         background: rgb(201, 41, 128);
     }
     
-    .wrong-signup, .success-message {
-        padding: 0.8rem 1rem;
-        border-radius: 6px;
-        margin-bottom: 1rem;
-    }
-    
     .wrong-signup {
         background-color: rgba(220, 53, 69, 0.1);
         color: #dc3545;
+        padding: 0.8rem 1rem;
+        border-radius: 6px;
         border-left: 4px solid #dc3545;
-    }
-
-    .success-message {
-        background-color: rgba(40, 167, 69, 0.1);
-        color: #28a745;
-        border-left: 4px solid #28a745;
     }
     
     @media (max-width: 520px) {
@@ -226,3 +236,28 @@
         }
     }
 </style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const setupPasswordToggle = (eyeId, inputId) => {
+            const eye = document.getElementById(eyeId);
+            const input = document.getElementById(inputId);
+
+            if (eye && input) {
+                eye.addEventListener('click', () => {
+                    if (input.type === 'password') {
+                        input.type = 'text';
+                        eye.classList.remove('fa-eye');
+                        eye.classList.add('fa-eye-slash');
+                    } else {
+                        input.type = 'password';
+                        eye.classList.remove('fa-eye-slash');
+                        eye.classList.add('fa-eye');
+                    }
+                });
+            }
+        };
+
+        setupPasswordToggle('eye-login', 'password');
+    });
+</script>
