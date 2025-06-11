@@ -7,7 +7,7 @@ body {
     overflow-x: hidden;
     color: #222;
     padding-bottom: 0;
-    padding-top: 110px; /* espace pour le header */
+    padding-top: 0px; /* espace pour le header */
     display: flex;
     flex-direction: column;
 }
@@ -35,7 +35,7 @@ body {
     height: 100vh;
     background: rgba(255,255,255,0.7);
     backdrop-filter: blur(60px);
-    z-index: 1; /* sous le header/footer, au-dessus du background-circle */
+    z-index: 0; /* sous le header/footer, au-dessus du background-circle */
     pointer-events: none;
 }
 
@@ -46,16 +46,17 @@ body {
 }
 
 .title-section {
-    position: relative;
-    width: 100%;
-    padding: 4rem 0 2rem 0;
-    margin-top:70px;
-    margin-bottom: 80px;
-    z-index: 2;
+    width: 100vw;
+    margin: 0;
+    padding: 60px 0 40px 0;
+    background: #fff;
+    border-radius: 0;
+    box-shadow: none;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden; /* pour cacher le cercle en dehors du titre */
+    position: relative;
+    overflow: hidden;
 }
 
 .main-title {
@@ -85,45 +86,52 @@ body {
 
 .main-content-white {
     background: #fff;
-    position: relative;
-    z-index: 2;
-    width: 100%;
-    min-height: calc(100vh - 110px - 120px); /* header + footer height */
-    box-shadow: 0 0 32px 0 rgba(201,41,128,0.04);
-    padding-top: 2rem;
-    padding-bottom: 0; /* retire le padding si tu veux coller au footer */
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+    min-height: unset;
+    border-radius: 0;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
 }
 
 .cards-row {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
-    justify-content: center;
-    margin-top: 0;
-    z-index: 2;
-    position: relative;
-    background: none; /* retire le fond blanc ici */
-    padding: 80px;
+    justify-items: center;
+    align-items: stretch;
+    margin: 0;
+    padding: 80px 0;
+    width: 100vw;
+    background: none;
 }
 
 .gradient-card {
-    background: #fff;
-    border-radius: rem;
-    border: 3px solid;
-    border-image: linear-gradient(90deg, rgb(201,41,128), rgb(247,130,52), rgb(172,30,163)) 1;
-    border-radius: 20px;
+    border-radius: 32px;
+    background: linear-gradient(90deg, rgb(201,41,128), rgb(247,130,52), rgb(172,30,163));
+    padding: 3px;
     box-shadow: 0 4px 24px 0 rgba(201,41,128,0.08);
-    padding: 2rem 1.5rem;
-    min-width: 240px;
+    width: 100%;
     max-width: 320px;
+    min-width: 240px;
     flex: 1 1 0;
+    display: flex;
+    position: relative;
+    transition: box-shadow 0.2s, transform 0.2s cubic-bezier(.4,2,.6,1), z-index 0.2s;
+    will-change: transform;
+    z-index: 1;
+    overflow: visible; /* important */
+}
+
+.gradient-card-inner {
+    background: #fff;
+    border-radius: 29px;
+    padding: 2rem 1.5rem;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    transition: box-shadow 0.2s;
-    
 }
 
 .gradient-card h2 {
@@ -141,7 +149,9 @@ body {
 }
 
 .gradient-card:hover {
-    box-shadow: 0 8px 32px 0 rgba(201,41,128,0.13);
+    box-shadow: 0 12px 36px 0 rgba(201,41,128,0.18);
+    transform: scale(1.07);
+    z-index: 2;
 }
 
 .main-footer {
@@ -231,6 +241,7 @@ body {
     overflow: hidden;
     background: #000;
     z-index: 1; /* Ajoute ceci */
+
 }
 
 .concert-gif {
@@ -300,6 +311,4 @@ body {
 @media (max-width: 700px) {
     .concert-title { font-size: 1.4rem; }
     .concert-content { padding: 2rem 0.5rem; }
-
-
 }
