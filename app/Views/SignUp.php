@@ -1,4 +1,3 @@
-//TODO : FONT SIZE 17PX
 
 <div class="container container-sign-up">
     <div class="sign-up">
@@ -19,38 +18,38 @@
 
         <form action="" class="form sign-up-form" method="post" id="myForm">
         <h1 id="titleInscription">Inscription</h1>
-        <p class="required required-signup">*Ces champs sont obligatoires</p>
+        <p class="required required-signup" style ="font-family: 'Montserrat', Arial, sans-serif;">*Ces champs sont obligatoires</p>
             <div class="form-row">
                 <!-- first-name --->
                 <div class="form-control">
-                    <label for="fName">Prénom<span class="required" style="margin-right: 30.5%;">*</span></label>
+                    <label for="fName">Prénom<span class="required" style="margin-right: 36%;">*</span></label>
                     <input type="text" id="fName" maxlength="50" placeholder="Votre prénom..." name="prenom" required>
                 </div>
                 <!-- last-name --->
                 <div class="form-control">
-                    <label for="lName">Nom de famille<span class="required" style="margin-right: 17%;">*</span></label>
+                    <label for="lName">Nom de famille<span class="required" style="margin-right: 24%;">*</span></label>
                     <input type="text" id="lName" maxlength="50" placeholder="Votre nom..." name="nom" required>
                 </div>
             </div>
             <!-- username --->
             <div class="form-control">
-                <label for="username">Pseudonyme<span class="required" style="margin-right:22.5%;">*</span></label>
+                <label for="username">Pseudonyme<span class="required" style="margin-right:27.5%;">*</span></label>
                 <input type="text" id="username" maxlength="30" placeholder="Votre pseudonyme..." name="pseudonyme" required>
             </div>
             <!-- email --->
             <div class="form-control">
-                <label for="email">Email<span class="required" style="margin-right: 35%;">*</span></label>
+                <label for="email">Email<span class="required" style="margin-right: 40.5%;">*</span></label>
                 <input id="email" maxlength="255" placeholder="Votre email..." required type="email" name="email">
                 <div id="emailError" class="wrong-signup" style="display: none;"></div>  <!-- AJOUTE APRES-->
             </div>
             <!-- tel --->
             <div class="form-control">
-                <label for="tel" style="margin-right: 29%;">Téléphone</label>
+                <label for="tel" style="margin-right: 33.5%;">Téléphone</label>
                 <input type="text" id="tel" maxlength="13" placeholder="+33 6 12 34 56 78" name="telephone">
             </div>
             <!-- password --->
             <div class="form-control">
-                <label for="password" id="passwordLabel">Mot de passe<span class="required">* </span><i style="margin-right: 17.5%;" class="fa-solid fa-circle-question" id="passwordInfo"></i></label>
+                <label for="password" id="passwordLabel">Mot de passe<span class="required">* </span><i style="margin-right: 23%;" class="fa-solid fa-circle-question" id="passwordInfo"></i></label>
                 <input id="password" type="password" placeholder="Votre mot de passe..." required name="motDePasse">
                 <span class="tooltip" id="password-tooltip" style="display: none;">
                     Le mot de passe doit contenir :
@@ -68,7 +67,7 @@
             </span>
             </div>
             <div class="form-control">
-                <label for="password" id="passwordLabelConfirmation" style="font-size:17px">Confirmez le mot de passe<span class="required">* </span></label>
+                <label for="password" id="passwordLabelConfirmation" style="font-size:17px">Confirmez le mot de passe<span class="required" style="margin-right:5%">* </span></label>
                 <input id="passwordConfirmation" type="password" placeholder="Votre mot de passe..." required name="motDePasseConfirmed">
                 <span class="eye-span signup-eye">
                 <i class="fa-solid fa-eye" aria-hidden="true"  type="button" id="eye1"></i>
@@ -115,8 +114,8 @@ body {
             position: absolute;
             width: 500px;
             height: 500px;
-            top:-60%;
-            left: -160%;
+            top:-35%;
+            left: -135%;
             background: radial-gradient(circle, rgba(201, 41, 128, 0.3), rgba(247, 130, 52, 0.3), rgba(172, 30, 163, 0.3));
             border-radius: 50%;
             filter: blur(30px);
@@ -126,7 +125,7 @@ body {
 
         .container-sign-up {
             position: relative;
-            width: 456px;
+            width: 35%;
             background:rgb(233, 238, 243);
             border-radius: 10px;
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -189,5 +188,10 @@ body {
             margin-top: -30px;
             margin-right: 10px;
             cursor: pointer;
+        }
+        label {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 17px;
+            font-weight: bold;
         }
 </style>
