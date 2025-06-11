@@ -1,27 +1,16 @@
 
 <?php
-require_once 'config/constants.php';
-include 'config/autoload.php';
-
-use Config\Log\Log;
-use Config\Log\LogFile;
-use Config\Log\LogLevel;
 
 session_start();
 
 $title = "Inscription";
 $errors = array();
 $isAuthPage = true;
-$logFile = LogFile::getInstance();
 
-ob_start();
+//require_once '.../Models/SignUpModele.php';
+require_once(__DIR__ . '/Check_SignUp.php');
+require_once(__DIR__ . '/../Models/SignUpModele.php');
 
-if (isset($_SESSION['account'])) {
-     header("Location: index.php");
-}
-
-require_once 'Models/SignUpModele.php';
-require_once 'Controllers/Check_SignUp.php';
 
 $nom = $email = $telephone = $prenom = $motDePasse = $pseudonyme = "";
 
@@ -88,17 +77,17 @@ if (isset($_POST) && count($_POST) > 0) {
     // if (empty($_POST['AcceptCGPS'])) {
     //     $errors['checkbox3'] = "Veullez accepter les CGPS";
     // }
-    if (!isset($_POST['prenom'])) {
-        $errors['prenom'] = "Le champ est obligatoire";
+    if (!isset($_POST['prenom'])|| empty(trim($_POST['prenom']))) {
+        $errors['prenom'] = "Le champ prenom est obligatoire";
     }
-    if (!isset($_POST['nom'])) {
-        $errors['nom'] = "Le champ est obligatoire";
+    if (!isset($_POST['nom'])|| empty(trim($_POST['nom']))) {
+        $errors['nom'] = "Le champ nom est obligatoire";
     }
-    if (!isset($_POST['pseudonyme'])) {
-        $errors['pseudonyme'] = "Le champ est obligatoire";
+    if (!isset($_POST['pseudonyme'])|| empty(trim($_POST['pseudonyme']))) {
+        $errors['pseudonyme'] = "Le champ pseudonyme est obligatoire";
     }
-    if (!isset($_POST['email'])) {
-        $errors['email'] = "Le champ est obligatoire";
+    if (!isset($_POST['email'])|| empty(trim($_POST['email']))) {
+        $errors['email'] = "Le champ email est obligatoire";
     }
 
 
@@ -106,7 +95,7 @@ if (isset($_POST) && count($_POST) > 0) {
         if ($validateEmail && $validatePhone && $validatePassword) {
             $hashedPassword = hashPassword($motDePasse);
             //$token = bin2hex(random_bytes(16));
-            $result = insertUser($nom, $prenom, $pseudonyme, $email, $hashedPassword, $telephone);
+            $result = insertUser($prenom, $nom, $email, $pseudonyme, $hashedPassword, $telephone);
 
             // $to = $email;
             // $validationLink = "https://www.makerhub.fr/validate.php?token=$token";
@@ -137,18 +126,10 @@ if (isset($_POST) && count($_POST) > 0) {
             // } else {
             //     echo "Failed to send email.";
             // }
-
-            $account = getUser($email);
-
-            //$logFile->addLog(new Log(LogLevel::INFO, "L'utilisateur " . $account['pseudonyme'] . " (id: " . $account["id_utilisateur"] . ") a été créé depuis " . $_SERVER['REMOTE_ADDR'] . "."));
-            header("Location: index.php");
+            header("Location: ./index.php");
         }
     }
 }
+include_once(__DIR__ . '/../Views/SignUpView.php');
 
 
-include_once 'Views/SignUp.html';
-
-$body = ob_get_clean();
-
-include_once 'Views/components/template.php';

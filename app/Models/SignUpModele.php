@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . '/../connectToDB.php');
+require_once(__DIR__ . '/connectToDB.php');
 
 /**
  * @param string $nom
@@ -21,10 +21,10 @@ function insertUser(string $prenom, string $nom, string $email, string $pseudony
             (select :prenom, :nom, :email, :pseudonyme, :motDePasse, :telephone)";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
-            ':nom' => $nom,
             ':prenom' => $prenom,
-            ':pseudonyme' => $pseudonyme,
+            ':nom' => $nom,
             ':email' => $email,
+            ':pseudonyme' => $pseudonyme,
             ':motDePasse' => $hashedPassword,
             ':telephone' => $telephone,
         ]);

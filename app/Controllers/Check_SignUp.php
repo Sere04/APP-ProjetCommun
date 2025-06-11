@@ -1,6 +1,6 @@
 
 <?php
-require_once('SignUpModele.php');
+require_once(__DIR__ . '/../Models/SignUpModele.php');
 
 if (!empty($_POST)) {
     if (isset($_POST['fonction'])) {

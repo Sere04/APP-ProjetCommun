@@ -8,12 +8,13 @@ function connectToDB(): PDO
     $pass = 'AppG2-C';
     $port = '3306';
     $charset = 'utf8mb4';
+    $dbname = 'G2C'; 
 
     $options = [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
     ];
-    $dsn = "mysql:host=$host;charset=$charset;port=$port";
+    $dsn = "mysql:host=$host;dbname=$dbname;charset=$charset;port=$port";
 
     try {
         return new PDO($dsn, $user, $pass, $options);
