@@ -86,7 +86,7 @@
                     <input type="submit" class="btn submit" value="S'inscrire" id="submitForm"/>
                 </div>
                 <div class="button go-login-button">
-                    <button type="button" class="button go-to-login-button" onclick="window.location.href = 'log-in.php';">Se connecter</button>
+                    <button type="button" class="button go-to-login-button" onclick="window.location.href = 'LogIn.php';">Se connecter</button>
                 </div>
             </div>
         </form>
