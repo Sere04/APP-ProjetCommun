@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 $title = "Connexion";
 $errors = array();
@@ -15,8 +14,6 @@ if (isset($_POST) && count($_POST) > 0) {
     }
 }
 
-ob_start();
-include_once __DIR__ . '/../Views/LogIn.php';
-$body = ob_get_clean();
+include_once(__DIR__ . '/../Views/LogInView.php');
 
-include_once __DIR__ . '/../Views/components/template.php';
+
