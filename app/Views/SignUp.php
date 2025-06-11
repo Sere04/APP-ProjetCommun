@@ -1,7 +1,8 @@
 <div class="container container-sign-up">
     <div class="sign-up">
-        <h1>Inscription</h1>
-        <p class="required required-signup">*Ces champs sont obligatoires</p>
+        <div class="background-circle"></div>
+        <div class="blurred-overlay"></div>
+       
 
         <?php if (!empty($errors)) : ?>
             <div class="error-container">
@@ -14,7 +15,8 @@
         <?php endif; ?>
 
         <form action="" class="form sign-up-form" method="post" id="myForm">
-            
+             <h1>Inscription</h1>
+            <p class="required required-signup">* champs obligatoires</p>
             <div class="form-control">
                 <label for="fName">Prénom<span class="required">*</span></label>
                 <input type="text" id="fName" maxlength="50" placeholder="Votre prénom..." name="prenom" required>
@@ -82,33 +84,27 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 <style>
-    body {
+   body {
         display: flex;
         justify-content: center;
-        align-items: center;
         min-height: 100vh;
         margin: 0;
         background-color: #f8f8fa;
         font-family: 'Montserrat', sans-serif;
         position: relative;
     }
-
-    body::before {
-        content: '';
-        position: absolute;
-        top: -15%;
-        left: -20%;
-        width: 600px;
-        height: 600px;
-        background: radial-gradient(circle, rgba(201, 41, 128, 0.5), rgba(247, 130, 52, 0.4));
-        border-radius: 50%;
-        filter: blur(100px);
-        z-index: 0;
-        opacity: 0.7;
-        pointer-events: none;
-    }
-
-    .container-sign-up {
+      .background-circle {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            top:-35%;
+            left: -135%;
+            background: radial-gradient(circle, rgba(201, 41, 128, 0.3), rgba(247, 130, 52, 0.3), rgba(172, 30, 163, 0.3));
+            border-radius: 50%;
+            filter: blur(30px);
+            z-index: 1;
+}
+     .container-sign-up {
         position: relative;
         z-index: 1;
         width: 90%;
@@ -120,7 +116,8 @@
         border: 1px solid rgba(255, 255, 255, 0.2);
         border-radius: 1.5rem;
         box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
-        margin: 2rem 0;
+        margin: 2rem auto;
+                height: 80vmin;
     }
 
     .sign-up h1 {
@@ -136,29 +133,27 @@
     }
 
     .required-signup {
-        text-align: center;
+        text-align: left;
         color: red;
-        margin: 0 0 2rem 0;
+        margin-bottom: -1%;
         font-size: 0.9rem;
     }
 
     .sign-up-form {
         display: flex;
         flex-direction: column;
-        gap: 1.25rem;
     }
 
     .form-control {
         position: relative;
         display: flex;
         flex-direction: column;
+        margin-top:3%;
     }
 
     .form-control label {
-        font-weight: 600;
-        margin-bottom: 0.5rem;
-        color: #333;
-        font-size: 0.95rem;
+        font-weight: bold;
+        margin-bottom: 1%;
     }
 
     .form-control label .required {
@@ -178,7 +173,6 @@
     }
 
     .form-control input:focus {
-        outline: none;
         border-color: rgb(201, 41, 128);
         box-shadow: 0 0 0 3px rgba(201, 41, 128, 0.2);
     }
@@ -189,12 +183,10 @@
         top: 65%;
         transform: translateY(-50%);
         cursor: pointer;
-        color: #888;
     }
 
     #passwordInfo {
         cursor: pointer;
-        color: #555;
         margin-left: 0.25rem;
     }
 
@@ -263,11 +255,12 @@
         border-radius: 6px;
         border-left: 4px solid #dc3545;
     }
-    
-    @media (max-width: 520px) {
+     @media (max-width: 520px) {
         .container-sign-up { padding: 2rem 1.5rem; margin: 1rem 0; }
         .sign-up h1 { font-size: 2rem; }
     }
+    
+
 </style>
 
 <script>
