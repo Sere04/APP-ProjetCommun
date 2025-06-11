@@ -1,7 +1,7 @@
 <div class="container container-sign-up">
     <div class="sign-up">
         <div class="background-circle"></div>
-        <div class="blurred-overlay"></div>
+        <div class="background-circle-bas"></div>
        
 
         <?php if (!empty($errors)) : ?>
@@ -85,39 +85,52 @@
 
 <style>
    body {
-        display: flex;
+        display: block;
         justify-content: center;
         min-height: 100vh;
         margin: 0;
         background-color: #f8f8fa;
         font-family: 'Montserrat', sans-serif;
         position: relative;
+            box-sizing: border-box;
+            padding: 40px 0;
+
+
     }
       .background-circle {
             position: absolute;
             width: 500px;
             height: 500px;
-            top:-35%;
-            left: -135%;
+            top:-15%;
+            left: -10%;
             background: radial-gradient(circle, rgba(201, 41, 128, 0.3), rgba(247, 130, 52, 0.3), rgba(172, 30, 163, 0.3));
             border-radius: 50%;
             filter: blur(30px);
             z-index: 1;
 }
+.background-circle-bas{
+            position: fixed;
+    bottom: 0;
+    left: 90%;
+    transform: translateX(-50%);
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(201, 41, 128, 0.3), rgba(247, 130, 52, 0.3), rgba(172, 30, 163, 0.3));
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: 2;
+    pointer-events: none;
+    overflow: hidden;
+}
      .container-sign-up {
-        position: relative;
-        z-index: 1;
-        width: 90%;
-        max-width: 480px;
-        padding: 2.5rem 3rem;
-        background: rgba(255, 255, 255, 0.65);
-        backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 1.5rem;
-        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
-        margin: 2rem auto;
-                height: 80vmin;
+    width: 35%;
+    margin: auto;
+    background-color: white;
+    z-index: 1;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    box-sizing: border-box;
     }
 
     .sign-up h1 {
@@ -129,7 +142,6 @@
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
-        text-fill-color: transparent;
     }
 
     .required-signup {
