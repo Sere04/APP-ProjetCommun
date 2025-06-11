@@ -105,7 +105,7 @@ body {
     z-index: 2;
     position: relative;
     background: none; /* retire le fond blanc ici */
-    padding: 20px;
+    padding: 80px;
 }
 
 .gradient-card {
@@ -113,6 +113,7 @@ body {
     border-radius: rem;
     border: 3px solid;
     border-image: linear-gradient(90deg, rgb(201,41,128), rgb(247,130,52), rgb(172,30,163)) 1;
+    border-radius: 20px;
     box-shadow: 0 4px 24px 0 rgba(201,41,128,0.08);
     padding: 2rem 1.5rem;
     min-width: 240px;
@@ -122,6 +123,7 @@ body {
     flex-direction: column;
     align-items: flex-start;
     transition: box-shadow 0.2s;
+    
 }
 
 .gradient-card h2 {
