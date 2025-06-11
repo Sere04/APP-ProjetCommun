@@ -1,3 +1,6 @@
+<div class="background-circle"></div>
+<div class="background-circle-bas"></div>
+
 <div class="container container-sign-up">
     <div class="sign-up">
         <h1>Mot de passe oublié</h1>
@@ -55,20 +58,30 @@
         display: flex;
         flex-direction: column;
         padding: 1rem 0;
+        overflow-x: hidden;
     }
 
-    body::before {
-        content: '';
+    .background-circle {
         position: absolute;
+        width: 500px;
+        height: 500px;
         top: -15%;
-        left: -20%;
-        width: 80vmin;
-        height: 80vmin;
-        background: radial-gradient(circle, rgba(201, 41, 128, 0.5), rgba(247, 130, 52, 0.4));
+        left: -10%;
+        background: radial-gradient(circle, rgba(201, 41, 128, 0.3), rgba(247, 130, 52, 0.3), rgba(172, 30, 163, 0.3));
         border-radius: 50%;
-        filter: blur(100px);
+        filter: blur(30px);
         z-index: 0;
-        opacity: 0.7;
+    }
+    .background-circle-bas{
+        position: absolute;
+        width: 500px;
+        height: 500px;
+        bottom: -15%;
+        right: -10%;
+        background: radial-gradient(circle, rgba(201, 41, 128, 0.3), rgba(247, 130, 52, 0.3), rgba(172, 30, 163, 0.3));
+        border-radius: 50%;
+        filter: blur(30px);
+        z-index: 0;
         pointer-events: none;
     }
 
