@@ -15,9 +15,11 @@
     z-index: 10;
 }
 
-.footer-logo img {
-    height: 48px;
-    width: auto;
+.footer-logo-img {
+    height: 40px; /* Ajustez la hauteur selon vos besoins */
+    width: auto; /* Laissez la largeur s'ajuster automatiquement pour conserver les proportions */
+    display: block; /* Assurez-vous que l'image est affichée comme un bloc */
+    margin-right: 15px; /* Ajoutez une marge si nécessaire pour l'espacement */
 }
 
 .footer-infos {
