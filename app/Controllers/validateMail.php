@@ -8,7 +8,7 @@ if (isset($_GET['token'])) {
     $token = $_GET['token'];
 
     $pdo = connectToDB();
-    $stmt = $pdo->prepare("SELECT * FROM User WHERE token = :valtoken AND is_verified = 0");
+    $stmt = $pdo->prepare("SELECT * FROM User WHERE token = :valtoken AND is_verified = 1");
     $stmt->execute([
         ':valtoken' => $token
     ]);
