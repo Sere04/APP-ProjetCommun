@@ -16,10 +16,10 @@
 }
 
 .footer-logo-img {
-    height: 40px; /* Ajustez la hauteur selon vos besoins */
-    width: auto; /* Laissez la largeur s'ajuster automatiquement pour conserver les proportions */
-    display: block; /* Assurez-vous que l'image est affichée comme un bloc */
-    margin-right: 15px; /* Ajoutez une marge si nécessaire pour l'espacement */
+    height: 120px; 
+    width: 86%; 
+    display: block; 
+    margin-right: 15px; 
 }
 
 .footer-infos {

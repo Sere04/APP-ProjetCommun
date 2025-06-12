@@ -66,17 +66,6 @@ if (isset($_POST) && count($_POST) > 0) {
         $errors['ConfirmdPassword'] = "Les mots de passe ne correspondent pas";
     }
 
-    // if (empty($_POST['is18More'])) {
-    //     $errors['checkbox1'] = "Veullez confirmer d'avoir plus de 18 ans";
-    // }
-
-    // if (empty($_POST['AcceptCGU'])) {
-    //     $errors['checkbox2'] = "Veullez accepter les CGU.";
-    // }
-
-    // if (empty($_POST['AcceptCGPS'])) {
-    //     $errors['checkbox3'] = "Veullez accepter les CGPS";
-    // }
     if (!isset($_POST['prenom'])|| empty(trim($_POST['prenom']))) {
         $errors['prenom'] = "Le champ prenom est obligatoire";
     }
@@ -94,39 +83,44 @@ if (isset($_POST) && count($_POST) > 0) {
     if (empty($errors)) {
         if ($validateEmail && $validatePhone && $validatePassword) {
             $hashedPassword = hashPassword($motDePasse);
-            //$token = bin2hex(random_bytes(16));
-            $result = insertUser($prenom, $nom, $email, $pseudonyme, $hashedPassword, $telephone);
+            $token = bin2hex(random_bytes(16));
+            $result = insertUser($prenom, $nom, $email, $pseudonyme, $hashedPassword, $telephone, $token);
+            if ($result) {
+                $_SESSION['success'] = "Inscription réussie ! Veuillez vérifier votre email pour valider votre compte.";
+            } else {
+                $errors['database'] = "Erreur lors de l'inscription, veuillez réessayer plus tard.";
+            }
 
-            // $to = $email;
-            // $validationLink = "https://www.makerhub.fr/validate.php?token=$token";
-            // $from = "no-reply@makerhub.fr";
-            // $subject = "[MakerHub] Confirmation d'inscription";
-            // $message = "
-            //     <html>
-            //         <head>
-            //             <title>Inscription</title>
-            //         </head>
+             $to = $email;
+             $validationLink = "./validateMail.php?token=$token";
+             $from = "no-reply@pulseZone.fr";
+             $subject = "[PulseZone] Confirmation d'inscription";
+             $message = "
+                 <html>
+                     <head>
+                         <title>Inscription</title>
+                     </head>
         
-            //         <body>
-            //             <h1>Confirmez votre inscription</h1><br>
-            //             <button><a href=\"" . $validationLink . "\">Confirmez</a></button><br><br>
-            //             <p>Cliquez sur le lien pour confirmer votre mail: <a href=\"" . $validationLink . "\">ici</a>.</p><br><br>
-            //             <p>Merci de votre confiance.</p><br>
-            //             <p>L'équipe de MakerHub.</p>
-            //         </body>
-            //     </html>
-            //     ";
+                     <body>
+                         <h1>Confirmez votre inscription</h1><br>
+                         <button><a href=\"" . $validationLink . "\">Confirmez</a></button><br><br>
+                         <p>Cliquez sur le lien pour confirmer votre mail: <a href=\"" . $validationLink . "\">ici</a>.</p><br><br>
+                         <p>Merci de votre confiance.</p><br>
+                         <p>L'équipe de MakerHub.</p>
+                     </body>
+                 </html>
+                 ";
 
-            // $headers = "From: " . $from . "\r\n" .
-            //     "Content-Type: text/html; charset=UTF-8\r\n" .
-            //     "MIME-Version: 1.0\r\n";
+             $headers = "From: " . $from . "\r\n" .
+                 "Content-Type: text/html; charset=UTF-8\r\n" .
+                 "MIME-Version: 1.0\r\n";
 
-            // if (mail($to, $subject, $message, $headers)) {
-            //     echo '<script>alert("Email sent successfully !")</script>';
-            // } else {
-            //     echo "Failed to send email.";
-            // }
-            header("Location: ./index.php");
+             if (mail($to, $subject, $message, $headers)) {
+                 echo '<script>alert("Email sent successfully !")</script>';
+             } else {
+                 echo "Failed to send email.";
+             }
+            header("Location: ../Views/home.php");
         }
     }
 }

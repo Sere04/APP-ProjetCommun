@@ -3,7 +3,7 @@ export function renderHeader() {
     <link rel="stylesheet" href="/app/Views/components/header.css">
     <header class="main-header">
         <div class="header-logo">
-            <img src="/APP-ProjetCommun/app/Views/Assets/img/logo.png" alt="Logo PulseZone">
+            <img src="../../assets/images/Logo.png" alt="Icône PulseZone" class="header-logo-img" >
         </div>
         <nav class="main-nav">
             <a href="/" class="nav-link">Accueil</a>

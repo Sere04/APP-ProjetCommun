@@ -13,12 +13,12 @@ require_once(__DIR__ . '/connectToDB.php');
  * @param string $token
  * @return int|null
  */
-function insertUser(string $prenom, string $nom, string $email, string $pseudonyme, string $hashedPassword, string $telephone): ?int
+function insertUser(string $prenom, string $nom, string $email, string $pseudonyme, string $hashedPassword, string $telephone, string $token): ?int
 {
     try {
         $pdo = connectToDB();
-        $sql = "INSERT INTO User (firstName, lastName, mailUser, userName, motDePasse, phoneNumber)
-            (select :prenom, :nom, :email, :pseudonyme, :motDePasse, :telephone)";
+        $sql = "INSERT INTO User (firstName, lastName, mailUser, userName, motDePasse, phoneNumber, token)
+            (select :prenom, :nom, :email, :pseudonyme, :motDePasse, :telephone, :token)";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
             ':prenom' => $prenom,
@@ -27,6 +27,7 @@ function insertUser(string $prenom, string $nom, string $email, string $pseudony
             ':pseudonyme' => $pseudonyme,
             ':motDePasse' => $hashedPassword,
             ':telephone' => $telephone,
+            ':token' => $token
         ]);
 
         $stmt->closeCursor();

@@ -3,7 +3,7 @@ export function renderFooter() {
     <link rel="stylesheet" href="/app/Views/components/footer.css">
     <footer class="main-footer glass-effect">
         <div class="footer-logo">
-            <img src=".../assets/images/Logo.png" alt="Icône PulseZone" class="footer-logo-img" >
+            <img src="../../assets/images/Logo.png" alt="Icône PulseZone" class="footer-logo-img" >
         </div>
         <div class="footer-infos">
             <p>PulseZone</p>
