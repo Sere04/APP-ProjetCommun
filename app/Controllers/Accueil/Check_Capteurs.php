@@ -1,6 +1,6 @@
 <?php
 
-// Connexion à la base de données (adapte les identifiants si besoin)
+// Connexion à la base de données
 $host = '144.76.54.100';
 $db   = 'G2';
 $user = 'G2';
@@ -16,14 +16,17 @@ $options = [
 
 try {
     $pdo = new PDO($dsn, $user, $pass, $options);
-
-    // Récupère tous les capteurs/actionneurs
-    $stmt = $pdo->query("SELECT id_objet, nom, description FROM capteur_actionneur");
+    // Récupération des capteurs
+    $stmt = $pdo->query("
+        SELECT ca.id_objet, ca.nom, ca.description, ca.unite, t.nom AS type_nom
+        FROM capteur_actionneur ca
+        JOIN type t ON ca.id_type = t.id_type
+        WHERE t.est_actionneur = 0
+    ");
     $capteurs = $stmt->fetchAll();
 
     $result = [];
 
-    // Pour chaque capteur, récupère la dernière mesure
     foreach ($capteurs as $capteur) {
         $stmtMesure = $pdo->prepare(
             "SELECT valeur_mesure, date_mesure 
@@ -35,12 +38,21 @@ try {
         $stmtMesure->execute([$capteur['id_objet']]);
         $mesure = $stmtMesure->fetch();
 
+        if (isset($mesure['valeur_mesure'])) {
+            $valeur = $mesure['valeur_mesure'];
+            if (!empty($capteur['unite'])) {
+                $valeur .= ' ' . $capteur['unite'];
+            }
+        } else {
+            $valeur = "Aucune donnée disponible";
+        }
+
         $result[] = [
             'id_objet'      => $capteur['id_objet'],
-            'nom'           => $capteur['nom'],
+            'nom'           => $capteur['type_nom'],
             'description'   => $capteur['description'],
-            'valeur_mesure' => $mesure['valeur_mesure'] ?? null,
-            'date_mesure'   => $mesure['date_mesure'] ?? null
+            'valeur_mesure' => $valeur,
+            'date_mesure'   => $mesure['date_mesure'] ?? "Aucune donnée disponible"
         ];
     }
 

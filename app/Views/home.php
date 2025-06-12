@@ -30,10 +30,10 @@
                 </div>
             </section>
 
-            <section class="cards-row">
-                <div id="refresh-timer" style="text-align:right; font-size:14px; color:#888; margin-bottom:10px;">
+            <section>
+                <!--<div id="refresh-timer" class="refresh-timer">
                     Rafraîchissement dans <span id="timer">10</span> secondes
-                </div>
+                </div>-->
                 <div id="cards-dynamic" class="cards-row">
                     <!-- Les cartes capteurs seront injectées ici -->
                 </div>
@@ -44,7 +44,8 @@
                 <div class="global-blur-overlay"></div>
                 <div class="content">
                     <h1 class="main-title">
-                        <span class="gradient-text">Bienvenue</span> sur la page d'accueil
+                        <span class="gradient-text">Rafraîchissement :</span>
+                        <span id="timer">10</span> secondes
                     </h1>
                     <p>Effet de profondeur avec dégradé et flou.</p>
                 </div>
@@ -74,8 +75,8 @@
             cardsDynamic.innerHTML = capteurs.map(c =>
                 `<div class="gradient-card">
                     <div class="gradient-card-inner">
-                        <h2>${c.nom}</h2>
-                        <p>${c.description ? c.description : ''}</p>
+                        <h2>${c.description ? c.description : ''}</h2>
+                        <p>Capteur : ${c.nom}</p>
                         <div style="margin-top:10px;">
                             <strong>Valeur :</strong> ${c.valeur_mesure !== null ? c.valeur_mesure : 'N/A'}
                             <br>
@@ -106,6 +107,7 @@
                 if (timer <= 0) {
                     fetchCapteurs();
                     timer = refreshInterval;
+                    timerSpan.textContent = timer;
                 }
             }, 1000);
         }
@@ -113,7 +115,6 @@
         // Initialisation
         fetchCapteurs();
         startTimer();
-        // Rafraîchit aussi toutes les 10s pour éviter tout décalage
         setInterval(fetchCapteurs, refreshInterval * 1000);
     </script>
 </body>
