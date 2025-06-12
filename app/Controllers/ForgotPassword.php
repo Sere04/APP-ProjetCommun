@@ -13,6 +13,5 @@ if (isset($_POST) && isset($_POST['email'])) {
         $successMessage = "Si un compte est associé à cette adresse email, un lien de réinitialisation vous a été envoyé.";
     }
 }
-
 include_once(__DIR__ . '/../Views/ForgotPasswordView.php');
 
