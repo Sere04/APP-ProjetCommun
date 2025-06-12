@@ -1,28 +1,16 @@
 
 <?php
-require_once 'config/constants.php';
-include 'config/autoload.php';
-
-use Config\Log\Log;
-use Config\Log\LogFile;
-use Config\Log\LogLevel;
-
 session_start();
 
 $title = "Inscription";
 $errors = array();
 $isAuthPage = true;
-$logFile = LogFile::getInstance();
 
-ob_start();
 
-if (isset($_SESSION['account'])) {
-     header("Location: index.php");
-}
+//require_once '.../Models/SignUpModele.php';
+require_once(__DIR__ . '/Check_SignUp.php');
+require_once(__DIR__ . '/../Models/SignUpModele.php');
 
-require_once 'modele/user/insertUser.php';
-require_once 'modele/user/checkCredentials.php';
-require_once 'modele/user/getUser.php';
 
 $nom = $email = $telephone = $prenom = $motDePasse = $pseudonyme = "";
 
@@ -34,8 +22,6 @@ if (isset($_POST) && count($_POST) > 0) {
     $pseudonyme = test_input($_POST["pseudonyme"]);
     $email = test_input($_POST["email"]);
     $telephone = test_input($_POST["telephone"]);
-    $description = test_input($_POST["description"]);
-    $role = isset($_POST['makerCheckbox']) && $_POST['makerCheckbox'] === 'on' ? 'vendeur' : 'acheteur'; // est set si la case est cochée
 
     $validateEmail = validateEmail($email);
     $validateEmailUnique = uniqueMail($email);
@@ -80,28 +66,17 @@ if (isset($_POST) && count($_POST) > 0) {
         $errors['ConfirmdPassword'] = "Les mots de passe ne correspondent pas";
     }
 
-    if (empty($_POST['is18More'])) {
-        $errors['checkbox1'] = "Veullez confirmer d'avoir plus de 18 ans";
+    if (!isset($_POST['prenom'])|| empty(trim($_POST['prenom']))) {
+        $errors['prenom'] = "Le champ prenom est obligatoire";
     }
-
-    if (empty($_POST['AcceptCGU'])) {
-        $errors['checkbox2'] = "Veullez accepter les CGU.";
+    if (!isset($_POST['nom'])|| empty(trim($_POST['nom']))) {
+        $errors['nom'] = "Le champ nom est obligatoire";
     }
-
-    if (empty($_POST['AcceptCGPS'])) {
-        $errors['checkbox3'] = "Veullez accepter les CGPS";
+    if (!isset($_POST['pseudonyme'])|| empty(trim($_POST['pseudonyme']))) {
+        $errors['pseudonyme'] = "Le champ pseudonyme est obligatoire";
     }
-    if (!isset($_POST['prenom'])) {
-        $errors['prenom'] = "Le champ est obligatoire";
-    }
-    if (!isset($_POST['nom'])) {
-        $errors['nom'] = "Le champ est obligatoire";
-    }
-    if (!isset($_POST['pseudonyme'])) {
-        $errors['pseudonyme'] = "Le champ est obligatoire";
-    }
-    if (!isset($_POST['email'])) {
-        $errors['email'] = "Le champ est obligatoire";
+    if (!isset($_POST['email'])|| empty(trim($_POST['email']))) {
+        $errors['email'] = "Le champ email est obligatoire";
     }
 
 
@@ -109,49 +84,47 @@ if (isset($_POST) && count($_POST) > 0) {
         if ($validateEmail && $validatePhone && $validatePassword) {
             $hashedPassword = hashPassword($motDePasse);
             $token = bin2hex(random_bytes(16));
-            $result = insertUser($nom, $prenom, $pseudonyme, $email, $hashedPassword, $telephone, $description, $role, $token);
 
-            $to = $email;
-            $validationLink = "https://www.makerhub.fr/validate.php?token=$token";
-            $from = "no-reply@makerhub.fr";
-            $subject = "[MakerHub] Confirmation d'inscription";
-            $message = "
-                <html>
-                    <head>
-                        <title>Inscription</title>
-                    </head>
-        
-                    <body>
-                        <h1>Confirmez votre inscription</h1><br>
-                        <button><a href=\"" . $validationLink . "\">Confirmez</a></button><br><br>
-                        <p>Cliquez sur le lien pour confirmer votre mail: <a href=\"" . $validationLink . "\">ici</a>.</p><br><br>
-                        <p>Merci de votre confiance.</p><br>
-                        <p>L'équipe de MakerHub.</p>
-                    </body>
-                </html>
-                ";
-
-            $headers = "From: " . $from . "\r\n" .
-                "Content-Type: text/html; charset=UTF-8\r\n" .
-                "MIME-Version: 1.0\r\n";
-
-            if (mail($to, $subject, $message, $headers)) {
-                echo '<script>alert("Email sent successfully !")</script>';
+            $result = insertUser($prenom, $nom, $email, $pseudonyme, $hashedPassword, $telephone, $token);
+            if ($result) {
+                $_SESSION['success'] = "Inscription réussie ! Veuillez vérifier votre email pour valider votre compte.";
             } else {
-                echo "Failed to send email.";
+                $errors['database'] = "Erreur lors de l'inscription, veuillez réessayer plus tard.";
             }
 
-            $account = getUser($email);
+             $to = $email;
+             $validationLink = "./validateMail.php?token=$token";
+             $from = "no-reply@pulseZone.fr";
+             $subject = "[PulseZone] Confirmation d'inscription";
+             $message = "
+                 <html>
+                     <head>
+                         <title>Inscription</title>
+                     </head>
+        
+                     <body>
+                         <h1>Confirmez votre inscription</h1><br>
+                         <button><a href=\"" . $validationLink . "\">Confirmez</a></button><br><br>
+                         <p>Cliquez sur le lien pour confirmer votre mail: <a href=\"" . $validationLink . "\">ici</a>.</p><br><br>
+                         <p>Merci de votre confiance.</p><br>
+                         <p>L'équipe de MakerHub.</p>
+                     </body>
+                 </html>
+                 ";
 
-            $logFile->addLog(new Log(LogLevel::INFO, "L'utilisateur " . $account['pseudonyme'] . " (id: " . $account["id_utilisateur"] . ") a été créé depuis " . $_SERVER['REMOTE_ADDR'] . "."));
-            header("Location: index.php");
+             $headers = "From: " . $from . "\r\n" .
+                 "Content-Type: text/html; charset=UTF-8\r\n" .
+                 "MIME-Version: 1.0\r\n";
+
+             if (mail($to, $subject, $message, $headers)) {
+                 echo '<script>alert("Email sent successfully !")</script>';
+             } else {
+                 echo "Failed to send email.";
+             }
+            header("Location: ../Views/home.php");
         }
     }
 }
+include_once(__DIR__ . '/../Views/SignUpView.php');
 
 
-include_once 'views/sign-up.html';
-
-$body = ob_get_clean();
-
-include_once 'view/components/template.php';

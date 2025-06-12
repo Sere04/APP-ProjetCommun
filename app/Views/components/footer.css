@@ -15,9 +15,11 @@
     z-index: 10;
 }
 
-.footer-logo img {
-    height: 48px;
-    width: auto;
+.footer-logo-img {
+    height: 120px; 
+    width: 86%; 
+    display: block; 
+    margin-right: 15px; 
 }
 
 .footer-infos {
