@@ -7,10 +7,10 @@ export function renderHeader() {
         </div>
         <nav class="main-nav">
             <a href="/" class="nav-link">Accueil</a>
-            <a href="#" class="nav-link">Produits</a>
+            <a href="#" class="nav-link">Espace de Gestion</a>
             <a href="#" class="nav-link">Fonctionnement</a>
-            <a href="#" class="nav-link">Blog</a>
             <a href="#" class="nav-link">Contact</a>
+            <a href="#" class="inscription-link">Inscription</a>
         </nav>
     </header>
     <script>

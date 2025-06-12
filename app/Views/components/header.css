@@ -94,6 +94,37 @@
     background: rgba(201, 89, 41, 0.08);
 }
 
+.inscription-link {
+    display: inline-block;
+    padding: 0.45rem 1.3rem;
+    border-radius: 0.4rem; /* Bords plus carrés */
+    background: linear-gradient(90deg, rgb(247,130,52) 0%, rgb(201,41,128) 100%);
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.08rem;
+    text-decoration: none;
+    transition: 
+        background 0.22s,
+        color 0.18s,
+        box-shadow 0.18s;
+    box-shadow: 0 2px 12px 0 rgba(247,130,52,0.10);
+    border: none;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    /* Animation */
+    opacity: 0;
+    transform: translateY(20px);
+    animation: navFadeIn 0.6s forwards;
+}
+
+.inscription-link:hover,
+.inscription-link:focus {
+    background: linear-gradient(90deg, rgb(201,41,128) 0%, rgb(247,130,52) 100%);
+    color: #fff;
+    box-shadow: 0 4px 18px 0 rgba(201,41,128,0.13);
+    text-decoration: none;
+}
+
 @keyframes navFadeIn {
     to {
         opacity: 1;

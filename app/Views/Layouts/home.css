@@ -59,6 +59,38 @@ body {
     overflow: hidden;
 }
 
+.title-section.justified-flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    padding: 60px 0 40px 0;
+    background: #fff;
+    border-radius: 0;
+    box-shadow: none;
+    width: 100vw;
+    margin: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.title-section.justified-flex .content {
+    flex: 1 1 0;
+    text-align: justify;
+    max-width: 600px;
+    z-index: 1;
+}
+
+.title-section.justified-flex .main-title {
+    text-align: justify;
+    margin-bottom: 1.2rem;
+}
+
+.title-section.justified-flex .dj-section-text {
+    text-align: justify;
+    margin-bottom: 1.5rem;
+}
+
 .main-title {
     margin: 0 auto 1.5rem auto;
     font-size: 2.5rem;
@@ -156,6 +188,18 @@ body {
     z-index: 2; /* Modifié */
 }
 
+.dj-image {
+    max-width: 340px;
+    width: 100%;
+    height: auto;
+    border-radius: 32px;
+    background: linear-gradient(90deg, rgb(201,41,128), rgb(247,130,52), rgb(172,30,163));
+    padding: 3px;
+    box-shadow: 0 4px 24px 0 rgba(201,41,128,0.08);
+    display: block;
+    /* Pour effet "carte" similaire aux cards */
+}
+
 .main-footer {
     z-index: 10;
     position: relative;
@@ -231,7 +275,8 @@ body {
     right: 50%;
     margin-left: -50vw;
     margin-right: -50vw;
-    margin-top: 100px;
+    /*margin-top: 100px;*/
+    padding-top:300px;
     display: flex;
     align-items: center;
     justify-content: center;
