@@ -54,9 +54,10 @@
 }
 
 .header-logo img {
-    height: 64px; /* augmente la taille du logo */
-    width: auto;
-    display: block;
+    height: 120px; 
+    width: 86%; 
+    display: block; 
+    margin-right: 15px; 
 }
 
 .header-logo {

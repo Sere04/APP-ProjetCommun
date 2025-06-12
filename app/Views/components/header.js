@@ -4,8 +4,6 @@ export function renderHeader() {
     <header class="main-header">
         <div class="header-logo">
             <img src="../../assets/images/Logo.png" alt="Icône PulseZone" class="header-logo-img" >
-
-
         </div>
         <nav class="main-nav">
             <a href="/APP-ProjetCommun/index.php" class="nav-link">Accueil</a>
