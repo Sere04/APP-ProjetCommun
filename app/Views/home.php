@@ -18,7 +18,7 @@
     <div class="main-content">
         <div class="main-content-white">
             <section class="concert-section">
-                <img src="/APP-PROJETCOMMUN/app/Views/Assets/img/concert.gif" alt="Concert" class="concert-gif">
+                <img src="../../assets/images/concert.gif" alt="Concert" class="concert-gif">
                 <div class="concert-blur"></div>
                 <div class="concert-overlay"></div>
                 <div class="concert-content">
