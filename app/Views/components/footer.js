@@ -5,12 +5,9 @@ export function renderFooter() {
     <footer class="main-footer glass-effect">
         <div class="footer-logo">
             <img src="../../assets/images/Logo.png" alt="Icône PulseZone" class="footer-logo-img" >
-
         </div>
         <div class="footer-infos">
             <p>PulseZone</p>
-
-
             <p>© 2025, <a href="#" class="underline">GNU v3.0</a></p>
         </div>
         <ul class="footer-links">
