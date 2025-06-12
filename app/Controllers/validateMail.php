@@ -9,6 +9,7 @@ if (isset($_GET['token'])) {
 
     $pdo = connectToDB();
     $stmt = $pdo->prepare("SELECT * FROM User WHERE token = :valtoken AND is_verified = 1");
+
     $stmt->execute([
         ':valtoken' => $token
     ]);
@@ -34,6 +35,7 @@ if (isset($_GET['token'])) {
                     </body>
                 </html>";
     $from = "pulsezonecompany@gmail.com";
+
     $headers = "From: " . $from . "\r\n" . 
                         "Content-Type: text/html; charset=UTF-8\r\n" .
                         "MIME-Version: 1.0\r\n";

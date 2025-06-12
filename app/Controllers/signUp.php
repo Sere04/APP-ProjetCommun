@@ -15,6 +15,7 @@ require_once(__DIR__ . '/../../vendor/autoload.php');
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
+
 $nom = $email = $telephone = $prenom = $motDePasse = $pseudonyme = "";
 
 if (isset($_POST) && count($_POST) > 0) {
@@ -71,6 +72,7 @@ if (isset($_POST) && count($_POST) > 0) {
 
     if (!isset($_POST['prenom'])|| empty(trim($_POST['prenom']))) {
         $errors['prenom'] = "Le champ prenom est obligatoire";
+
     }
     if (!isset($_POST['nom'])|| empty(trim($_POST['nom']))) {
         $errors['nom'] = "Le champ nom est obligatoire";
@@ -78,6 +80,7 @@ if (isset($_POST) && count($_POST) > 0) {
     if (!isset($_POST['pseudonyme'])|| empty(trim($_POST['pseudonyme']))) {
         $errors['pseudonyme'] = "Le champ pseudonyme est obligatoire";
     }
+
     if (!isset($_POST['email'])|| empty(trim($_POST['email']))) {
         $errors['email'] = "Le champ email est obligatoire";
     }
@@ -95,6 +98,7 @@ if (isset($_POST) && count($_POST) > 0) {
                 $errors['database'] = "Erreur lors de l'inscription, veuillez réessayer plus tard.";
             }
 
+
                             $mail = new PHPMailer(true);
             try {
             $mail->isSMTP();
@@ -110,6 +114,7 @@ if (isset($_POST) && count($_POST) > 0) {
             $mail->Subject = "[PulseZone] Confirmation d'inscription";
 
             $mail->Body  = "
+
                  <html>
                      <head>
                          <title>Inscription</title>
@@ -138,5 +143,6 @@ if (isset($_POST) && count($_POST) > 0) {
     }
 
 include_once(__DIR__ . '/../Views/SignUpView.php');
+
 
 
