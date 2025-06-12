@@ -63,24 +63,25 @@
 
     .background-circle {
         position: absolute;
-        width: 500px;
-        height: 500px;
-        top: -15%;
-        left: -10%;
-        background: radial-gradient(circle, rgba(201, 41, 128, 0.3), rgba(247, 130, 52, 0.3), rgba(172, 30, 163, 0.3));
+        width: 600px;
+        height: 600px;
+        top: -20%;
+        left: -15%;
+        background: radial-gradient(circle, rgba(201, 41, 128, 0.22), rgba(247, 130, 52, 0.18), rgba(172, 30, 163, 0.18));
         border-radius: 50%;
-        filter: blur(30px);
+        filter: blur(80px) brightness(1.2);
         z-index: 0;
+        pointer-events: none;
     }
     .background-circle-bas{
         position: absolute;
-        width: 500px;
-        height: 500px;
-        bottom: -15%;
-        right: -10%;
-        background: radial-gradient(circle, rgba(201, 41, 128, 0.3), rgba(247, 130, 52, 0.3), rgba(172, 30, 163, 0.3));
+        width: 600px;
+        height: 600px;
+        bottom: -20%;
+        right: -15%;
+        background: radial-gradient(circle, rgba(201, 41, 128, 0.22), rgba(247, 130, 52, 0.18), rgba(172, 30, 163, 0.18));
         border-radius: 50%;
-        filter: blur(30px);
+        filter: blur(80px) brightness(1.2);
         z-index: 0;
         pointer-events: none;
     }
@@ -105,7 +106,7 @@
         font-size: clamp(1.6rem, 5vw, 2rem);
         font-weight: 700;
         margin: 0 0 0.5rem 0;
-        background: linear-gradient(90deg, rgb(201,41,128) 0%, rgb(247,130,52) 100%);
+        background: linear-gradient(90deg, rgb(201,41,128) 0%, rgb(247,130,52) 50%, rgb(172,30,163) 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
