@@ -19,6 +19,7 @@
         <div class="main-content-white">
             <section class="concert-section">
                 <img src="../../assets/images/concert.gif" alt="Concert" class="concert-gif">
+
                 <div class="concert-blur"></div>
                 <div class="concert-overlay"></div>
                 <div class="concert-content">

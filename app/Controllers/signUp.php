@@ -1,11 +1,11 @@
 
 <?php
-
 session_start();
 
 $title = "Inscription";
 $errors = array();
 $isAuthPage = true;
+
 
 //require_once '.../Models/SignUpModele.php';
 require_once(__DIR__ . '/Check_SignUp.php');
@@ -84,6 +84,7 @@ if (isset($_POST) && count($_POST) > 0) {
         if ($validateEmail && $validatePhone && $validatePassword) {
             $hashedPassword = hashPassword($motDePasse);
             $token = bin2hex(random_bytes(16));
+
             $result = insertUser($prenom, $nom, $email, $pseudonyme, $hashedPassword, $telephone, $token);
             if ($result) {
                 $_SESSION['success'] = "Inscription réussie ! Veuillez vérifier votre email pour valider votre compte.";

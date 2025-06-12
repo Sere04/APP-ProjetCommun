@@ -7,6 +7,7 @@ export function renderFooter() {
         </div>
         <div class="footer-infos">
             <p>PulseZone</p>
+
             <p>© 2025, <a href="#" class="underline">GNU v3.0</a></p>
         </div>
         <ul class="footer-links">
