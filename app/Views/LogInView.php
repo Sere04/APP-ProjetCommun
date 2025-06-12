@@ -43,7 +43,7 @@
             
             <div class="button-group" style="margin-top: 1.5rem;">
                <span style="margin-left: 37%;font-size: 12px;">
-                    <a class="forgot-password-link" href="../Controllers/SignUp.php">Mot de passe oublié ?</a>
+                    <a class="forgot-password-link" href="../Controllers/ForgotPassword.php">Mot de passe oublié ?</a>
                 </span> 
                 <div class="button signup-button">
                     <input type="submit" class="btn submit" value="Se connecter"/>
