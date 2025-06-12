@@ -133,7 +133,7 @@ if (isset($_POST) && count($_POST) > 0) {
             } else {
                 $errors['database'] = "Erreur lors de l'inscription, veuillez réessayer plus tard.";
             }
-            header("Location: ../Views/home.php");
+            header("Location: ../Controllers/LogIn.php");
         }
     }
 
