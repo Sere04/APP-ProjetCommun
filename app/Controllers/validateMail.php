@@ -33,7 +33,7 @@ if (isset($_GET['token'])) {
                         <p>L'équipe de PulseZone.</p>
                     </body>
                 </html>";
-    $from = "no-reply@pulseZone.fr";
+    $from = "pulsezonecompany@gmail.com";
     $headers = "From: " . $from . "\r\n" . 
                         "Content-Type: text/html; charset=UTF-8\r\n" .
                         "MIME-Version: 1.0\r\n";

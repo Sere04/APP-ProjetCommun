@@ -10,7 +10,10 @@ $isAuthPage = true;
 //require_once '.../Models/SignUpModele.php';
 require_once(__DIR__ . '/Check_SignUp.php');
 require_once(__DIR__ . '/../Models/SignUpModele.php');
+require_once(__DIR__ . '/../../vendor/autoload.php'); 
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 $nom = $email = $telephone = $prenom = $motDePasse = $pseudonyme = "";
 
@@ -92,11 +95,21 @@ if (isset($_POST) && count($_POST) > 0) {
                 $errors['database'] = "Erreur lors de l'inscription, veuillez réessayer plus tard.";
             }
 
-             $to = $email;
-             $validationLink = "./validateMail.php?token=$token";
-             $from = "no-reply@pulseZone.fr";
-             $subject = "[PulseZone] Confirmation d'inscription";
-             $message = "
+                            $mail = new PHPMailer(true);
+            try {
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com'; // Specify main and backup SMTP servers
+            $mail->SMTPAuth = true; // Enable SMTP authentication   
+            $mail->Username = 'pulsezonecompany@gmail.com'; // Remplacez par votre adresse email
+            $mail->Password = 'Pulse.Zone1!'; // Remplacez par votre mot de passe
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = 465 ;
+            $mail->setFrom('pulsezonecompany@gmail.com', 'PulseZone');
+            $mail->addAddress($email);
+            $mail->isHTML(true);
+            $mail->Subject = "[PulseZone] Confirmation d'inscription";
+
+            $mail->Body  = "
                  <html>
                      <head>
                          <title>Inscription</title>
@@ -112,19 +125,18 @@ if (isset($_POST) && count($_POST) > 0) {
                  </html>
                  ";
 
-             $headers = "From: " . $from . "\r\n" .
-                 "Content-Type: text/html; charset=UTF-8\r\n" .
-                 "MIME-Version: 1.0\r\n";
-
-             if (mail($to, $subject, $message, $headers)) {
-                 echo '<script>alert("Email sent successfully !")</script>';
-             } else {
-                 echo "Failed to send email.";
-             }
+                $mail->send();
+                    echo '<script>alert("Email sent successfully!")</script>';
+                } catch (Exception $e) {
+                    echo "L'email n'a pas pu être envoyé. Erreur : {$mail->ErrorInfo}";
+                }
+            } else {
+                $errors['database'] = "Erreur lors de l'inscription, veuillez réessayer plus tard.";
+            }
             header("Location: ../Views/home.php");
         }
     }
-}
+
 include_once(__DIR__ . '/../Views/SignUpView.php');
 
 
