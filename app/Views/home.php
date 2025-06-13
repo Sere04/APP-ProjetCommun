@@ -1,5 +1,7 @@
+
 <?php
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -28,34 +30,50 @@
                     <p class="concert-desc">Lorem Ipsum</p>
                 </div>
             </section>
+            
+            <section class="title-section">
+                <div class="content">
+                    <h1 class="main-title">
+                        Les données de votre salle de concert<span class="gradient-text"> mises à jour en temps réel</span>.
+                    </h1>
+                    <p>Prochaine actualisation dans <span id="timer">10</span> secondes</p>
+                </div>
+            </section>
 
             <section>
                 <!--<div id="refresh-timer" class="refresh-timer">
                     Rafraîchissement dans <span id="timer">10</span> secondes
                 </div>-->
+                <div class="background-circle"></div>
+                <div class="global-blur-overlay"></div>
                 <div id="cards-dynamic" class="cards-row">
                     <!-- Les cartes capteurs seront injectées ici -->
                 </div>
             </section>
-        
-            <section class="title-section">
-                <div class="background-circle"></div>
-                <div class="global-blur-overlay"></div>
+
+            <section class="title-section justified-flex">
                 <div class="content">
                     <h1 class="main-title">
-                        <span class="gradient-text">Rafraîchissement :</span>
-                        <span id="timer">10</span> secondes
+                        <span class="gradient-text">Plus aucun secret pour vous</span>.
                     </h1>
+                    <p class="dj-section-text">
+                        Que vous soyez un simple visiteur ou un prestataire souhaitant proposer un évènement, le système PulseZone vous indique tout ce qu'il faut savoir sur votre lieu de fête. C'est notre devise.
+                    </p>
                 </div>
+                <img src="../../assets/images/nightclub.jpg" alt="DJ" class="dj-image">
             </section>
+
         </div>
         
     </div>
     <div id="footer"></div>
     <script type="module">
-        import { renderHeader } from '/APP-ProjetCommun/app/Views/components/header.js';
+        import { renderHeader, initHeaderScripts } from '/APP-ProjetCommun/app/Views/components/header.js';
         import { renderFooter } from '/APP-ProjetCommun/app/Views/components/footer.js';
+
         document.getElementById('header').innerHTML = renderHeader();
+        initHeaderScripts();
+
         document.getElementById('footer').innerHTML = renderFooter();
 
         // --- Début du script capteurs dynamiques ---
@@ -87,7 +105,7 @@
 
         async function fetchCapteurs() {
             try {
-                const res = await fetch('/APP-ProjetCommun/app/Controllers/Accueil/Check_Capteurs.php');
+                const res = await fetch('../Models/Check_Capteurs.php');
                 const data = await res.json();
                 renderCards(data);
             } catch (e) {
