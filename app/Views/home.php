@@ -84,7 +84,7 @@
                     <h2 class="concert-title">
                         Vivez vos évènements dans la plus <span class="gradient-text">high tech</span> des salles de concerts
                     </h2>
-                    <p class="concert-desc">Lorem Ipsum</p>
+                    <p class="concert-desc">PulseWave révolutionne l'expérience sonore et visuelle en vous plongeant au cœur d'une immersion totale. Grâce à une acoustique de pointe, des jeux de lumières intelligents et une technologie connectée inédite, chaque concert, conférence ou spectacle devient un moment inoubliable. Entrez dans une nouvelle ère événementielle où chaque vibration compte.</p>
                 </div>
             </section>
             
