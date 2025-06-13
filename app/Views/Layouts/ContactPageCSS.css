@@ -180,11 +180,11 @@ body {
     }
     
     @media (max-width: 520px) {
-        .container-sign-up { 
+        .container-contact { 
             padding: 1.5rem 1.5rem; 
             margin: auto; 
         }
-        .sign-up h1 { 
+        .contact h1 { 
             font-size: 1.8rem; 
         }
     }
