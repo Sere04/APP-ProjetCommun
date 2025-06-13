@@ -15,3 +15,4 @@ if (isset($_POST) && isset($_POST['email'])) {
 }
 include_once(__DIR__ . '/../Views/ForgotPasswordView.php');
 
+
