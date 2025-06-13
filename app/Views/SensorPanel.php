@@ -29,6 +29,10 @@
                 <button class="sensor-action-btn" id="btn-rename-sensor">✏️ Renommer</button>
                 <button class="sensor-action-btn" id="btn-add-data">➕ Ajouter une donnée</button>
             </div>
+            <div id="sensor-backup-actions" class="sensor-actions">
+                <button class="sensor-action-btn" id="btn-backup">💾 Sauvegarder ce graphe</button>
+                <button class="sensor-action-btn" id="btn-restore" disabled>Aucune backup disponible</button>
+            </div>
         </section>
     </main>
     <div id="footer"></div>
@@ -97,6 +101,22 @@
                     }
                 }
             });
+            updateBackupButtons();
+        }
+
+        async function updateBackupButtons() {
+            const backupBtn = document.getElementById('btn-backup');
+            const restoreBtn = document.getElementById('btn-restore');
+            restoreBtn.disabled = true;
+            restoreBtn.textContent = "Aucune backup disponible";
+            if (!currentSensorId) return;
+            // Vérifie s'il existe une backup
+            const res = await fetch('../Models/Get_Backup_Info.php?id=' + currentSensorId);
+            const info = await res.json();
+            if (info.hasBackup) {
+                restoreBtn.disabled = false;
+                restoreBtn.textContent = "Restaurer la backup du " + new Date(info.date).toLocaleString('fr-FR');
+            }
         }
 
         // Actions
@@ -145,6 +165,23 @@
                         }
                     }
                 );
+            }
+            if (e.target.id === 'btn-backup') {
+                if (!currentSensorId) return;
+                const res = await fetch('../Models/Backup_Capteur.php?id=' + currentSensorId);
+                const data = await res.json();
+                alert(data.message);
+                updateBackupButtons();
+            }
+            if (e.target.id === 'btn-restore') {
+                if (!currentSensorId) return;
+                if (confirm("Restaurer la dernière backup ? Les données actuelles seront remplacées.")) {
+                    const res = await fetch('../Models/Restore_Capteur.php?id=' + currentSensorId);
+                    const data = await res.json();
+                    alert(data.message);
+                    fetchCapteursStats();
+                    updateBackupButtons();
+                }
             }
         });
 
