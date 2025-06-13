@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 $title = "Mot de passe oublié";
 $errors = array();
@@ -14,4 +15,8 @@ if (isset($_POST) && isset($_POST['email'])) {
     }
 }
 
+ob_start();
 include_once __DIR__ . '/../Views/ForgotPassword.php';
+$body = ob_get_clean();
+
+include_once __DIR__ . '/../Views/components/template.php';
