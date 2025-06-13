@@ -1,5 +1,6 @@
 <?php
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -12,64 +13,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        /* Modal pour graphe capteur */
-        .sensor-modal-bg {
-            position: fixed;
-            inset: 0;
-            background: rgba(201,41,128,0.10);
-            backdrop-filter: blur(2px);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .sensor-modal-panel {
-            background: #fff;
-            border-radius: 1.5rem;
-            box-shadow: 0 8px 32px 0 rgba(201,41,128,0.13);
-            padding: 2.2rem 2rem 1.5rem 2rem;
-            min-width: 320px;
-            max-width: 95vw;
-            max-height: 90vh;
-            text-align: center;
-            color: #c92980;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative;
-        }
-        .sensor-modal-panel h2 {
-            margin-bottom: 1.2rem;
-            font-size: 1.2rem;
-            font-weight: 700;
-        }
-        .sensor-modal-close {
-            position: absolute;
-            top: 1.2rem;
-            right: 1.2rem;
-            background: none;
-            border: none;
-            font-size: 2rem;
-            color: #c92980;
-            cursor: pointer;
-            z-index: 10;
-        }
-        .sensor-modal-canvas {
-            width: 100% !important;
-            max-width: 600px;
-            height: 320px !important;
-            margin: 0 auto;
-        }
-        @media (max-width: 700px) {
-            .sensor-modal-panel {
-                padding: 1rem 0.2rem 1rem 0.2rem;
-            }
-            .sensor-modal-canvas {
-                height: 180px !important;
-            }
-        }
-    </style>
 </head>
 <body>
     <div id="header"></div>
@@ -84,7 +27,7 @@
                     <h2 class="concert-title">
                         Vivez vos évènements dans la plus <span class="gradient-text">high tech</span> des salles de concerts
                     </h2>
-                    <p class="concert-desc">PulseWave révolutionne l'expérience sonore et visuelle en vous plongeant au cœur d'une immersion totale. Grâce à une acoustique de pointe, des jeux de lumières intelligents et une technologie connectée inédite, chaque concert, conférence ou spectacle devient un moment inoubliable. Entrez dans une nouvelle ère événementielle où chaque vibration compte.</p>
+                    <p class="concert-desc">Lorem Ipsum</p>
                 </div>
             </section>
             
@@ -103,7 +46,6 @@
                 </div>-->
                 <div class="background-circle"></div>
                 <div class="global-blur-overlay"></div>
-
                 <div id="cards-dynamic" class="cards-row">
                     <!-- Les cartes capteurs seront injectées ici -->
                 </div>
@@ -121,13 +63,10 @@
                 <img src="../../assets/images/nightclub.jpg" alt="DJ" class="dj-image">
             </section>
 
-
-
         </div>
         
     </div>
     <div id="footer"></div>
-    <div id="sensor-modal-root"></div>
     <script type="module">
         import { renderHeader, initHeaderScripts } from '/APP-ProjetCommun/app/Views/components/header.js';
         import { renderFooter } from '/APP-ProjetCommun/app/Views/components/footer.js';
@@ -150,9 +89,8 @@
                 cardsDynamic.innerHTML = '<div style="color:#888; text-align:center; width:100%;">Aucun capteur trouvé.</div>';
                 return;
             }
-            cardsDynamic.innerHTML = capteurs.map((c, i) =>
-                `<div class="gradient-card" data-id="${c.id_objet}" style="cursor:pointer;">
-
+            cardsDynamic.innerHTML = capteurs.map(c =>
+                `<div class="gradient-card">
                     <div class="gradient-card-inner">
                         <h2>${c.description ? c.description : ''}</h2>
                         <p>Capteur : ${c.nom}</p>
@@ -164,14 +102,6 @@
                     </div>
                 </div>`
             ).join('');
-            // Ajoute l'écouteur pour ouvrir le modal
-            document.querySelectorAll('.gradient-card').forEach(card => {
-                card.addEventListener('click', () => {
-                    const id = card.getAttribute('data-id');
-                    openSensorModal(id);
-                });
-            });
-
         }
 
         async function fetchCapteurs() {
@@ -199,79 +129,10 @@
             }, 1000);
         }
 
-        let sensorChartModal = null;
-
-        async function openSensorModal(id_objet) {
-            // Récupère les données du capteur (historique)
-            const res = await fetch('../Models/Get_Capteur_Stats.php');
-            const capteurs = await res.json();
-            const capteur = capteurs.find(c => c.id_objet == id_objet);
-            if (!capteur) return;
-
-            // Crée le modal
-            const modalRoot = document.getElementById('sensor-modal-root');
-            modalRoot.innerHTML = `
-                <div class="sensor-modal-bg">
-                    <div class="sensor-modal-panel">
-                        <button class="sensor-modal-close" aria-label="Fermer">&times;</button>
-                        <h2>${capteur.description || capteur.nom}</h2>
-                        <canvas id="sensorModalChart" class="sensor-modal-canvas"></canvas>
-                    </div>
-                </div>
-            `;
-
-            // Fermer le modal
-            modalRoot.querySelector('.sensor-modal-close').onclick = closeSensorModal;
-            modalRoot.querySelector('.sensor-modal-bg').onclick = (e) => {
-                if (e.target.classList.contains('sensor-modal-bg')) closeSensorModal();
-            };
-
-            // Affiche le graphe
-            const ctx = document.getElementById('sensorModalChart').getContext('2d');
-            const labels = capteur.mesures.map(m => m.date);
-            const data = capteur.mesures.map(m => parseFloat(m.valeur));
-            if (sensorChartModal) sensorChartModal.destroy();
-            sensorChartModal = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels,
-                    datasets: [{
-                        label: capteur.description || capteur.nom,
-                        data,
-                        borderColor: 'rgb(201,41,128)',
-                        backgroundColor: 'rgba(201,41,128,0.08)',
-                        tension: 0.2,
-                        pointRadius: 2,
-                        fill: true,
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: { display: false }
-                    },
-                    scales: {
-                        x: { display: true, title: { display: true, text: 'Date' } },
-                        y: { display: true, title: { display: true, text: capteur.unite || '' } }
-                    }
-                }
-            });
-        }
-
-        function closeSensorModal() {
-            document.getElementById('sensor-modal-root').innerHTML = '';
-            if (sensorChartModal) {
-                sensorChartModal.destroy();
-                sensorChartModal = null;
-            }
-        }
-
-
         // Initialisation
         fetchCapteurs();
         startTimer();
         setInterval(fetchCapteurs, refreshInterval * 1000);
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
 </html>
