@@ -14,8 +14,8 @@ export function renderHeader() {
             <a href="/" class="nav-link">Accueil</a>
             <a href="#" class="nav-link">Espace de Gestion</a>
             <a href="#" class="nav-link">Fonctionnement</a>
-            <a href="#" class="nav-link">Contact</a>
-            <a href="#" class="inscription-link">Inscription</a>
+            <a href="../Controllers/ContactPage.php" class="nav-link">Contact</a>
+            <a href="../Controllers/signUp.php" class="inscription-link">Inscription</a>
         </nav>
     </header>
     `;

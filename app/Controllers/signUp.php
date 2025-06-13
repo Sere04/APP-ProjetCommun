@@ -44,7 +44,7 @@ if (isset($_POST) && count($_POST) > 0) {
         $errors['email'] = "Ce mail existe déjà";
     }
     if (!$validatePhone) {
-        $errors['telephone'] = "Veuillez saisir un téléphone valide";
+        $errors['telephone'] = "Veuillez saisir un téléphone valide : 0648791234";
     }
     if (!$validatePassword) {
         $errors['motDePasse'] = "Veuillez saisir un mot de passe valide.</br> Il doit contenir au moins :</br>"
