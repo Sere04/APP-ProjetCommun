@@ -101,7 +101,7 @@
 
         async function fetchCapteurs() {
             try {
-                const res = await fetch('/APP-ProjetCommun/app/Controllers/Accueil/Check_Capteurs.php');
+                const res = await fetch('../Models/Check_Capteurs.php');
                 const data = await res.json();
                 renderCards(data);
             } catch (e) {

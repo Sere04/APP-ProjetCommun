@@ -1,21 +1,9 @@
 <?php
 
-// Connexion à la base de données
-$host = '144.76.54.100';
-$db   = 'G2';
-$user = 'G2';
-$pass = 'APPG2-BDD';
-$charset = 'utf8mb4';
-
-$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
-$options = [
-    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    PDO::ATTR_EMULATE_PREPARES   => false,
-];
+require_once(__DIR__ . '/connectToDB.php');
 
 try {
-    $pdo = new PDO($dsn, $user, $pass, $options);
+    $pdo = connectToDBALL();
     // Récupération des capteurs
     $stmt = $pdo->query("
         SELECT ca.id_objet, ca.nom, ca.description, ca.unite, t.nom AS type_nom

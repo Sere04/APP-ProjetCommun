@@ -13,10 +13,6 @@ export function renderFooter() {
         <ul class="footer-links">
             <li><a href="#">Nous contacter</a></li>
             <li><a href="../Views/legalNotice.html">Mentions légales</a></li>
-            <li><a href="#">Cookies</a></li>
-            <li><a href="#">CGU</a></li>
-            <li><a href="#">CGPS</a></li>
-            <li><a href="#">FAQ</a></li>
         </ul>
     </footer>
     <script src="https://kit.fontawesome.com/c54f418805.js" crossorigin="anonymous"></script>
