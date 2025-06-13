@@ -67,9 +67,12 @@
     </div>
     <div id="footer"></div>
     <script type="module">
-        import { renderHeader } from '/APP-ProjetCommun/app/Views/components/header.js';
+        import { renderHeader, initHeaderScripts } from '/APP-ProjetCommun/app/Views/components/header.js';
         import { renderFooter } from '/APP-ProjetCommun/app/Views/components/footer.js';
+
         document.getElementById('header').innerHTML = renderHeader();
+        initHeaderScripts();
+
         document.getElementById('footer').innerHTML = renderFooter();
 
         // --- Début du script capteurs dynamiques ---
