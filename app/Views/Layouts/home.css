@@ -1,3 +1,4 @@
+
 body {
     min-height: 100vh;
     margin: 0;
@@ -75,7 +76,6 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-fill-color: transparent;
     filter: drop-shadow(0 2px 8px rgba(201,41,128,0.13));
 }
 
@@ -176,7 +176,6 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-fill-color: transparent;
     display: block;
     letter-spacing: 0.5px;
     z-index: 2;
@@ -184,7 +183,6 @@ body {
 .refresh-timer #timer {
     font-weight: bold;
     -webkit-text-fill-color: #222;
-    text-fill-color: #222;
     background: none;
 }
 
@@ -225,19 +223,16 @@ body {
 .concert-section {
     position: relative;
     width: 100vw;
-    min-height: 400px;
-    max-height: 60vh;
+    min-height: 100vh;
     left: 50%;
     right: 50%;
     margin-left: -50vw;
     margin-right: -50vw;
-    margin-top: 100px;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
     background: #000;
-    z-index: 1; /* Ajoute ceci */
 }
 
 .concert-gif {
@@ -293,7 +288,6 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-fill-color: transparent;
     filter: drop-shadow(0 2px 8px rgba(201,41,128,0.13));
 }
 

@@ -1,6 +1,5 @@
 <?php
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -47,7 +46,6 @@
                         <span class="gradient-text">Rafraîchissement :</span>
                         <span id="timer">10</span> secondes
                     </h1>
-                    <p>Effet de profondeur avec dégradé et flou.</p>
                 </div>
             </section>
         </div>
@@ -119,4 +117,3 @@
     </script>
 </body>
 </html>
-
