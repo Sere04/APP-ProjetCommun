@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="../Views/Layouts/SignUpCSS.css">
 </head>
 <body>
-     <button type="button" class="go-to-home-button" onclick="window.location.href = '../Views/home.php';">Accueil</button>
+     <button type="button" class="go-to-home-button" onclick="window.location.href = 'index.php';">Accueil</button>
 <div class="container container-sign-up">
     <div class="sign-up">
         <div class="background-circle"></div>
