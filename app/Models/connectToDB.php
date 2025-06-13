@@ -26,19 +26,21 @@ function connectToDB(): PDO
 function connectToDBALL(): PDO
 {
     $host = '144.76.54.100';
-    $user = 'G2';
-    $pass = 'AppG2-BDD';
-    $port = '3306';
-    $charset = 'utf8mb4';
+$db   = 'G2';
+$user = 'G2';
+$pass = 'APPG2-BDD';
+$charset = 'utf8mb4';
 
-    $options = [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    ];
-    $dsn = "mysql:host=$host;charset=$charset;port=$port";
+$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+$options = [
+    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_EMULATE_PREPARES   => false,
+];
 
     try {
-        return new PDO($dsn, $user, $pass, $options);
+        return  new PDO($dsn, $user, $pass, $options);
+
     } catch (\PDOException $e) {
         throw new \PDOException($e->getMessage(), (int)$e->getCode());
     }
