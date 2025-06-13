@@ -1,6 +1,5 @@
 <?php
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -78,6 +77,7 @@
         <div class="main-content-white">
             <section class="concert-section">
                 <img src="../../assets/images/concert.gif" alt="Concert" class="concert-gif">
+
                 <div class="concert-blur"></div>
                 <div class="concert-overlay"></div>
                 <div class="concert-content">
@@ -103,6 +103,7 @@
                 </div>-->
                 <div class="background-circle"></div>
                 <div class="global-blur-overlay"></div>
+
                 <div id="cards-dynamic" class="cards-row">
                     <!-- Les cartes capteurs seront injectées ici -->
                 </div>
@@ -119,6 +120,7 @@
                 </div>
                 <img src="../../assets/images/nightclub.jpg" alt="DJ" class="dj-image">
             </section>
+
 
 
         </div>
@@ -150,6 +152,7 @@
             }
             cardsDynamic.innerHTML = capteurs.map((c, i) =>
                 `<div class="gradient-card" data-id="${c.id_objet}" style="cursor:pointer;">
+
                     <div class="gradient-card-inner">
                         <h2>${c.description ? c.description : ''}</h2>
                         <p>Capteur : ${c.nom}</p>
@@ -161,7 +164,6 @@
                     </div>
                 </div>`
             ).join('');
-
             // Ajoute l'écouteur pour ouvrir le modal
             document.querySelectorAll('.gradient-card').forEach(card => {
                 card.addEventListener('click', () => {
@@ -169,6 +171,7 @@
                     openSensorModal(id);
                 });
             });
+
         }
 
         async function fetchCapteurs() {
@@ -262,6 +265,7 @@
                 sensorChartModal = null;
             }
         }
+
 
         // Initialisation
         fetchCapteurs();
