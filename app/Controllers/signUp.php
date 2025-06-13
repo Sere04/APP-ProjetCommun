@@ -44,7 +44,7 @@ if (isset($_POST) && count($_POST) > 0) {
         $errors['email'] = "Ce mail existe déjà";
     }
     if (!$validatePhone) {
-        $errors['telephone'] = "Veuillez saisir un téléphone valide";
+        $errors['telephone'] = "Veuillez saisir un téléphone valide : 0648791234";
     }
     if (!$validatePassword) {
         $errors['motDePasse'] = "Veuillez saisir un mot de passe valide.</br> Il doit contenir au moins :</br>"
@@ -90,59 +90,59 @@ if (isset($_POST) && count($_POST) > 0) {
         if ($validateEmail && $validatePhone && $validatePassword) {
             $hashedPassword = hashPassword($motDePasse);
             $token = bin2hex(random_bytes(16));
-
+            $validationLink = "http://localhost/APP-ProjetCommun/app/Controllers/validateMail.php?token=" . urlencode($token);
             $result = insertUser($prenom, $nom, $email, $pseudonyme, $hashedPassword, $telephone, $token);
-            if ($result) {
+           if ($result) {
                 $_SESSION['success'] = "Inscription réussie ! Veuillez vérifier votre email pour valider votre compte.";
-            } else {
-                $errors['database'] = "Erreur lors de l'inscription, veuillez réessayer plus tard.";
-            }
 
+                $mail = new PHPMailer(true);
+                try {
+                    $mail->isSMTP();
+                    $mail->Host = 'smtp.gmail.com';
+                    $mail->SMTPAuth = true;
+                    $mail->Username = 'pulsezonecompany@gmail.com';
+                    $mail->Password = 'opvl fdon uvhr vftt';
+                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                    $mail->Port = 587;  
+              
+                    $mail->setFrom('pulsezonecompany@gmail.com', 'PulseZone');
+                    $mail->addAddress($email);
+                    $mail->isHTML(true);
+                    $mail->Subject = "[PulseZone] Confirmation d'inscription";
+                    $mail->Body = "
+    <html>
+        <head>
+            <title>Inscription</title>
+            <meta charset='UTF-8'>
+        </head>
+        <body>
+            <h1>Confirmez votre inscription</h1>
+            <p>Bonjour $prenom $nom,</p>
+            <p>Merci de votre inscription. Veuillez confirmer votre compte en cliquant sur le lien ci-dessous :</p>
+            <p><a href='$validationLink'>Confirmer mon inscription</a></p>
+            <br>
+            <p>
+            L'équipe de PulseZone.
+            </p>
+        </body>
+    </html>";
 
-                            $mail = new PHPMailer(true);
-            try {
-            $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com'; // Specify main and backup SMTP servers
-            $mail->SMTPAuth = true; // Enable SMTP authentication   
-            $mail->Username = 'pulsezonecompany@gmail.com'; // Remplacez par votre adresse email
-            $mail->Password = 'Pulse.Zone1!'; // Remplacez par votre mot de passe
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port = 465 ;
-            $mail->setFrom('pulsezonecompany@gmail.com', 'PulseZone');
-            $mail->addAddress($email);
-            $mail->isHTML(true);
-            $mail->Subject = "[PulseZone] Confirmation d'inscription";
-
-            $mail->Body  = "
-
-                 <html>
-                     <head>
-                         <title>Inscription</title>
-                     </head>
-        
-                     <body>
-                         <h1>Confirmez votre inscription</h1><br>
-                         <button><a href=\"" . $validationLink . "\">Confirmez</a></button><br><br>
-                         <p>Cliquez sur le lien pour confirmer votre mail: <a href=\"" . $validationLink . "\">ici</a>.</p><br><br>
-                         <p>Merci de votre confiance.</p><br>
-                         <p>L'équipe de MakerHub.</p>
-                     </body>
-                 </html>
-                 ";
-
-                $mail->send();
-                    echo '<script>alert("Email sent successfully!")</script>';
+                    $mail->send();
+                    echo "<script>alert('Inscription réussie ! Un email de confirmation a été envoyé.'); window.location.href = '../Views/home.php';</script>";
+                    exit();
                 } catch (Exception $e) {
-                    echo "L'email n'a pas pu être envoyé. Erreur : {$mail->ErrorInfo}";
+                        $errorMessage = "L'email n'a pas pu être envoyé. Erreur : {$mail->ErrorInfo}";
+                    echo "<script>console.error('$errorMessage');</script>";
                 }
             } else {
                 $errors['database'] = "Erreur lors de l'inscription, veuillez réessayer plus tard.";
             }
-            header("Location: ../Controllers/LogIn.php");
+            header("Location: ../Views/home.php");
         }
     }
+}
 
 include_once(__DIR__ . '/../Views/SignUpView.php');
-
+?>
 
 

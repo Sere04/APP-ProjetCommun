@@ -107,7 +107,6 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-fill-color: transparent;
     filter: drop-shadow(0 2px 8px rgba(201,41,128,0.13));
 }
 
@@ -220,7 +219,6 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-fill-color: transparent;
     display: block;
     letter-spacing: 0.5px;
     z-index: 2;
@@ -228,7 +226,6 @@ body {
 .refresh-timer #timer {
     font-weight: bold;
     -webkit-text-fill-color: #222;
-    text-fill-color: #222;
     background: none;
 }
 
@@ -338,7 +335,6 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-fill-color: transparent;
     filter: drop-shadow(0 2px 8px rgba(201,41,128,0.13));
 }
 
