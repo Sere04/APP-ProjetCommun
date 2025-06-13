@@ -13,7 +13,6 @@ export function renderFooter() {
             <li><a href="../Views/legalNotice.html">Mentions légales</a></li>
             <li><a href="../Views/cookies.html">Cookies</a></li>
             <li><a href="../Views/cgu.html">CGU</a></li>
-            <li><a href="../Views/cpgs.html">CGPS</a></li>
         </ul>
     </footer>
     <script src="https://kit.fontawesome.com/c54f418805.js" crossorigin="anonymous"></script>
