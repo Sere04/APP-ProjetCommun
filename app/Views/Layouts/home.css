@@ -19,7 +19,7 @@ body {
     width: 600px;
     height: 600px;
     transform: translate(-50%, -55%);
-    background: radial-gradient(circle at 60% 40%, rgb(201,41,128), rgb(247,130,52), rgb(172,30,163));
+    background: radial-gradient(circle at 60% 40%, rgb(201, 41, 128), rgb(247, 130, 52), rgb(172,30,163));
     border-radius: 50%;
     z-index: 0;
     filter: blur(45px);
