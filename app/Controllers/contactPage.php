@@ -5,7 +5,11 @@ session_start();
 $title = "Contact";
 $errors = array();
 $isAuthPage = true;
-
+if (!isset($_SESSION['user'])) {
+    $_SESSION['login_required'] = true;
+    header("Location: ../Controllers/LogIn.php");
+    exit();
+}
 
 //require_once '.../Models/SignUpModele.php';
 require_once(__DIR__ . '/../../vendor/autoload.php'); 

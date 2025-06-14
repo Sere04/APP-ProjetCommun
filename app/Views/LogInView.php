@@ -1,5 +1,12 @@
 <?php
 ?>
+<?php
+session_start();
+if (isset($_SESSION['login_required']) && $_SESSION['login_required'] === true) {
+    echo "<script>alert('Il faut se connecter pour accéder à la page');</script>";
+    unset($_SESSION['login_required']); 
+}
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -10,6 +17,7 @@
 <link rel="stylesheet" href="../Views/Layouts/LogInCSS.css">
 </head>
 <body>
+         <button type="button" class="go-to-home-button" onclick="window.location.href = '../Views/home.php';">Accueil</button> 
 <div class="container container-sign-up">
     <div class="sign-up">
         <h1>Connexion</h1>
@@ -19,7 +27,7 @@
         <?php if (!empty($errors)) : ?>
             <div class="error-container" style="margin-bottom: 1rem;">
                 <?php foreach ($errors as $error): ?>
-                    <div class="wrong-signup">
+                    <div class="wrong-login">
                         <?= $error ?>
                     </div>
                 <?php endforeach; ?>
@@ -30,12 +38,12 @@
             
             <div class="form-control">
                 <label for="emailOrUsername">Email ou Pseudonyme<span class="required">*</span></label>
-                <input type="text" id="emailOrUsername" placeholder="Votre email ou pseudo..." name="emailOrUsername" required>
+                <input type="text" id="emailOrUsername" placeholder="Votre email ou pseudo..." name="emailOrUsername" >
             </div>
 
             <div class="form-control">
                 <label for="password">Mot de passe<span class="required">*</span></label>
-                <input id="password" type="password" placeholder="Votre mot de passe..." required name="password">
+                <input id="password" type="password" placeholder="Votre mot de passe..."  name="password">
                 <span class="eye-span signup-eye">
                     <i class="fa-solid fa-eye" aria-hidden="true" type="button" id="eye-login"></i>
                 </span>
