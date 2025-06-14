@@ -11,11 +11,11 @@ export function renderHeader() {
             <span></span>
         </button>
         <nav class="main-nav">
-            <a href="/" class="nav-link">Accueil</a>
-            <a href="#" class="nav-link">Espace de Gestion</a>
-            <a href="#" class="nav-link">Fonctionnement</a>
-            <a href="#" class="nav-link">Contact</a>
-            <a href="#" class="inscription-link">Inscription</a>
+            <a href="/APP-ProjetCommun/index.php" class="nav-link">Accueil</a>
+            <a href="/APP-ProjetCommun/app/Views/SensorPanel.php" class="nav-link">Espace de Gestion</a>
+            <a href="/APP-ProjetCommun/app/Views/About.php" class="nav-link">Fonctionnement</a>
+            <a href="/APP-ProjetCommun/app/Views/Contact.php" class="nav-link">Contact</a>
+            <a href="/APP-ProjetCommun/app/Views/SignUpView.php" class="inscription-link">Inscription</a>
         </nav>
     </header>
     `;
