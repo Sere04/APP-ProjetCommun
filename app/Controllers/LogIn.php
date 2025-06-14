@@ -26,10 +26,9 @@ if (isset($_POST) && count($_POST) > 0) {
         session_start();
         $_SESSION['user'] = $account;
         $_SESSION['isLoggedIn'] = true;
-        $_SESSION['isAdmin'] = $account['isAdmin'];
         $_SESSION['isVerified'] = $account['isVerified'];
         $_SESSION['username'] = $account['username'];
-
+        $_SESSION['Permission'] = $account['Permission'];
         }
 
     if (empty($errors)) {    
