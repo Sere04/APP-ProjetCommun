@@ -16,6 +16,7 @@ export function renderHeader() {
             <a href="/APP-ProjetCommun/app/Views/About.php" class="nav-link">Fonctionnement</a>
             <a href="/APP-ProjetCommun/app/Views/Contact.php" class="nav-link">Contact</a>
             <a href="/APP-ProjetCommun/app/Views/SignUpView.php" class="inscription-link">Inscription</a>
+
         </nav>
     </header>
     `;
