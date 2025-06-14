@@ -1,4 +1,3 @@
-
 <?php
 ?>
 
@@ -8,6 +7,7 @@
     <meta charset="UTF-8">
     <title>Accueil</title>
     <link rel="stylesheet" href="Layouts/home.css">
+    <script src="assets/js/loader.js"></script>
     <link rel="stylesheet" href="components/header.css">
     <link rel="stylesheet" href="components/footer.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -134,6 +134,7 @@
         initHeaderScripts();
 
         document.getElementById('footer').innerHTML = renderFooter();
+
 
         // --- Début du script capteurs dynamiques ---
         const cardsDynamic = document.getElementById('cards-dynamic');
