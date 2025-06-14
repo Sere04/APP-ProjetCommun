@@ -1,5 +1,12 @@
-<?php
+
+<?php 
+session_start();
+if (isset($_SESSION['error'])) {
+    echo "<script>alert('" . $_SESSION['error'] . "');</script>";
+    unset($_SESSION['error']);
+} 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -126,6 +133,9 @@
     </div>
     <div id="footer"></div>
     <div id="sensor-modal-root"></div>
+    <script>
+    window.isLoggedIn = <?= isset($_SESSION['user']) ? 'true' : 'false' ?>;
+</script>
     <script type="module">
         import { renderHeader, initHeaderScripts } from '/APP-ProjetCommun/app/Views/components/header.js';
         import { renderFooter } from '/APP-ProjetCommun/app/Views/components/footer.js';

@@ -10,13 +10,12 @@ export function renderHeader() {
             <span></span>
             <span></span>
         </button>
-        <nav class="main-nav">
-            <a href="/APP-ProjetCommun/index.php" class="nav-link">Accueil</a>
-            <a href="/APP-ProjetCommun/app/Views/SensorPanel.php" class="nav-link">Espace de Gestion</a>
+        <nav class="main-nav nav">
+            <a href="../Views/SensorPanel.php" class="nav-link">Espace de Gestion</a>
             <a href="/APP-ProjetCommun/app/Views/About.php" class="nav-link">Fonctionnement</a>
-            <a href="/APP-ProjetCommun/app/Views/Contact.php" class="nav-link">Contact</a>
-            <a href="/APP-ProjetCommun/app/Views/SignUpView.php" class="inscription-link">Inscription</a>
-
+            <a href="../Controllers/ContactPage.php" class="nav-link">Contact</a>
+            <a href="../Controllers/logIn.php" class="connection-link">Se Connecter</a>
+            <a href="../Controllers/signUp.php" class="inscription-link">Inscription</a>
         </nav>
     </header>
     `;
@@ -27,6 +26,32 @@ export function initHeaderScripts() {
     document.querySelectorAll('.nav-link, .inscription-link').forEach((link, i) => {
         link.style.animationDelay = `${0.3 + i * 0.15}s`;
     });
+   
+      // Remplace "Inscription" par "Se déconnecter" si l'utilisateur est connecté
+    if (window.isLoggedIn === true || window.isLoggedIn === 'true') {
+          const navBar = document.querySelector('.nav'); 
+    if (navBar) {
+        const homeLink = document.createElement('a');
+        homeLink.href = '../Views/home.php'; 
+        homeLink.textContent = 'Accueil';
+        homeLink.classList.add('nav-link');
+        homeLink.style.animationDelay = '0s';
+        navBar.insertBefore(homeLink, navBar.firstChild); 
+    }
+        const link = document.querySelector('.inscription-link');
+        if (link) {
+            link.textContent ="Se déconnecter";
+            link.href = "../Controllers/logout.php";
+            link.classList.add("logout-link"); 
+            link.addEventListener('click', (e) => {
+            alert("Vous vous êtes déconnecté.");
+        });
+        }
+         const loginButton = document.querySelector('.connection-link');
+    if (loginButton) {
+        loginButton.style.display = "none";
+    }
+    }
 
     // Effet bulle sur resize
     let resizeTimeout;

@@ -1,4 +1,10 @@
 <?php
+session_start();
+ if (!isset($_SESSION['user']) || $_SESSION['Permission'] !== 'Administrateur') {
+    $_SESSION['error'] = "Accès réservé aux administrateurs";
+    header("Location: ../Views/home.php");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -46,6 +52,9 @@
 </section>
 
     <div id="footer"></div>
+        <script>
+    window.isLoggedIn = <?= isset($_SESSION['user']) ? 'true' : 'false' ?>;
+</script>
     <script type="module">
         import { renderHeader, initHeaderScripts } from '/APP-ProjetCommun/app/Views/components/header.js';
         import { renderFooter } from '/APP-ProjetCommun/app/Views/components/footer.js';

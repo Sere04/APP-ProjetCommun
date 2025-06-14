@@ -7,7 +7,7 @@ function getUser(string $email): ?array
 {
     try {
         $pdo = connectToDB();
-        $sql = "SELECT * FROM `User` WHERE mailUser=:valEmail OR userName=:valUserName and is_verified = 1;";
+        $sql = "SELECT * FROM `User` WHERE (mailUser = :valEmail OR userName = :valUserName) AND is_verified = 1;";
 
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(":valEmail", $email);

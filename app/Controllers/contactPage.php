@@ -6,7 +6,6 @@ $title = "Contact";
 $errors = array();
 $isAuthPage = true;
 
-
 //require_once '.../Models/SignUpModele.php';
 require_once(__DIR__ . '/../../vendor/autoload.php'); 
 require_once(__DIR__ . '/Check_SignUp.php');
