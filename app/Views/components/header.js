@@ -13,8 +13,8 @@ export function renderHeader() {
         <nav class="main-nav nav">
             <a href="../Views/SensorPanel.php" class="nav-link">Espace de Gestion</a>
             <a href="/APP-ProjetCommun/app/Views/About.php" class="nav-link">Fonctionnement</a>
-            <a href="../Controllers/ContactPage.php" class="nav-link">Contact</a>
-            <a href="../Controllers/logIn.php" class="connection-link">Se Connecter</a>
+            <a href="../Controllers/contactPage.php" class="nav-link">Contact</a>
+            <a href="../Controllers/LogIn.php" class="connection-link">Se Connecter</a>
             <a href="../Controllers/signUp.php" class="inscription-link">Inscription</a>
         </nav>
     </header>

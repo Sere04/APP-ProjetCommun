@@ -12,7 +12,7 @@ export function renderFooter() {
             <p>© 2025, <a href="#" class="underline">GNU v3.0</a></p>
         </div>
         <ul class="footer-links">
-            <li><a href="../Controllers/ContactPage.php">Nous contacter</a></li>
+            <li><a href="../Controllers/contactPage.php">Nous contacter</a></li>
             <li><a href="../Views/legalNotice.html">Mentions légales</a></li>
         </ul>
     </footer>
