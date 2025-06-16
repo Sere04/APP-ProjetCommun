@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require_once __DIR__ . '/../Models/connectToDB.php';
 $pdoPrivee = connectToDB();
 $pdoPublique = connectToDBALL();
