@@ -44,55 +44,70 @@ $historique = $stmt->fetchAll();
     <link href="./assets/css/style.css" rel="stylesheet">
     <style>
         body {
-            min-height: 100vh;
-            margin: 0;
-            font-family: 'Montserrat', Arial, sans-serif;
-            background: #f8f8fa;
-            position: relative;
-            overflow-x: hidden;
-            color: #222;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        .background-circle {
+        min-height: 100vh;
+        margin: 0;
+        background-color: #f8f8fa;
+        font-family: 'Montserrat', sans-serif;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        padding: 1rem 0;
+        overflow: hidden;
+    }
+
+   .background-circle {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 600px;
-            height: 600px;
-            transform: translate(-50%, -55%);
-            background: radial-gradient(circle at 60% 40%, rgb(201, 41, 128), rgb(247, 130, 52), rgb(172,30,163));
+            width: 500px;
+            height: 500px;
+            top:-60%;
+            left: -130%;
+            background: radial-gradient(circle, rgba(201, 41, 128, 0.3), rgba(247, 130, 52, 0.3), rgba(172, 30, 163, 0.3));
             border-radius: 50%;
-            z-index: 0;
-            filter: blur(45px);
-            pointer-events: none;
-        }
-        .global-blur-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(255,255,255,0.7);
-            backdrop-filter: blur(60px);
-            z-index: 0;
-            pointer-events: none;
-        }
+            filter: blur(30px);
+            z-index: -1;
+}
+.background-circle-bas{
+    position: fixed;
+    bottom: 0;
+    top: 70%;
+    left: 190%;
+    transform: translateX(-50%);
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(201, 41, 128, 0.3), rgba(247, 130, 52, 0.3), rgba(172, 30, 163, 0.3));
+    border-radius: 50%;
+    filter: blur(30px);
+    z-index: 2;
+    pointer-events: none;
+    overflow: hidden;
+}
+ .go-to-home-button {
+        background:  rgb(247, 130, 52);
+        width: 8%;
+        border: none;
+        margin-left: 4%;
+        font-weight: 600;
+        cursor: pointer;
+        font-size: 1.1rem;
+        padding: 0.5rem;
+        border-radius:8px;
+        color: white;
+        z-index: 2;
+
+    }
         .container {
-            max-width: 500px;
-            width: 100%;
-            background: #fff;
-            border-radius: 32px;
-            box-shadow: 0 4px 24px 0 rgba(201,41,128,0.08);
-            padding: 40px 30px 30px 30px;
-            z-index: 2;
             position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+        z-index: 1;
+        width: 90%;
+        max-width: 420px;
+        padding: 2rem 2.5rem;
+        background: rgba(255, 255, 255, 0.65);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 1.5rem;
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+        margin: auto;
         }
         .count {
             font-size: 5em;
@@ -100,6 +115,7 @@ $historique = $stmt->fetchAll();
             margin: 30px 0 10px 0;
             font-weight: 800;
             letter-spacing: -2px;
+            text-align: center;
         }
         .label {
             font-size: 2em;
@@ -122,6 +138,7 @@ $historique = $stmt->fetchAll();
             cursor: pointer;
             font-weight: 600;
             transition: background 0.2s;
+            margin-left:8%;
         }
         .btn-historique:hover {
             background: linear-gradient(90deg, rgb(172,30,163), rgb(247,130,52), rgb(201,41,128));
@@ -194,9 +211,11 @@ $historique = $stmt->fetchAll();
     </style>
 </head>
 <body>
-    <div class="background-circle"></div>
-    <div class="global-blur-overlay"></div>
+             <button type="button" class="go-to-home-button" onclick="window.location.href = '../Views/home.php';">Accueil</button> 
+   
     <div class="container">
+         <div class="background-circle"></div>
+        <div class="background-circle-bas"></div>
         <form method="post">
             <button type="submit" name="reset" class="btn-reset">Réinitialiser toutes les mesures</button>
         </form>
