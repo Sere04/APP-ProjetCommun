@@ -1,4 +1,5 @@
 <?php
+
 require_once(__DIR__ . '/connectToDB.php');
 
 header('Content-Type: application/json');
@@ -60,3 +61,8 @@ if ($action === 'changepass') {
 }
 
 echo json_encode(['error'=>'Unknown action']);
+if (!isset($_SESSION['Permission']) || $_SESSION['Permission'] !== 'Administrateur') {
+    http_response_code(403);
+    echo json_encode(['error' => 'Accès interdit']);
+    exit;
+}

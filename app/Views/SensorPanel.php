@@ -1,9 +1,11 @@
 <?php
 session_start();
- if (!isset($_SESSION['user']) || $_SESSION['Permission'] !== 'Administrateur') {
-    $_SESSION['error'] = "Accès réservé aux administrateurs";
-    header("Location: ../Views/home.php");
-    exit();
+if (!isset($_SESSION['Permission']) || $_SESSION['Permission'] === 'Utilisateur') {
+    echo '<script>
+        alert("Accès interdit.");
+        window.location.href = "home.php"; 
+    </script>';
+    exit;
 }
 ?>
 
@@ -54,6 +56,8 @@ session_start();
     <div id="footer"></div>
         <script>
     window.isLoggedIn = <?= isset($_SESSION['user']) ? 'true' : 'false' ?>;
+    window.userRole = "<?php echo isset($_SESSION['Permission']) ? htmlspecialchars($_SESSION['Permission']) : ''; ?>";
+
 </script>
     <script type="module">
         import { renderHeader, initHeaderScripts } from '/APP-ProjetCommun/app/Views/components/header.js';
@@ -63,6 +67,15 @@ session_start();
         initHeaderScripts();
         document.getElementById('footer').innerHTML = renderFooter();
 
+        document.addEventListener('DOMContentLoaded', () => {
+    if (window.userRole === 'Administrateur') {
+        //ICI accés complet
+    } else (window.userRole === 'Modérateur') {
+        //on masque les utiliateurs
+        const userSection = document.querySelector('section:nth-of-type(2)');
+        if (userSection) userSection.style.display = 'none';
+    } 
+});
         // --- Capteurs dynamiques ---
         let capteursData = [];
         let chart = null;
