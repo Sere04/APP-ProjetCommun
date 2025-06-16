@@ -11,8 +11,7 @@ export function renderHeader() {
             <span></span>
         </button>
         <nav class="main-nav nav">
-            <a href="../Views/SensorPanel.php" class="nav-link">Espace de Gestion</a>
-            <a href="/APP-ProjetCommun/app/Views/About.php" class="nav-link">Fonctionnement</a>
+            <a id="fonctionnementNav" href="/APP-ProjetCommun/app/Views/About.php" class="nav-link">Fonctionnement</a>
             <a href="../Controllers/contactPage.php" class="nav-link">Contact</a>
             <a href="../Controllers/LogIn.php" class="connection-link">Se Connecter</a>
             <a href="../Controllers/signUp.php" class="inscription-link">Inscription</a>
@@ -28,6 +27,7 @@ export function initHeaderScripts() {
     });
    
       // Remplace "Inscription" par "Se déconnecter" si l'utilisateur est connecté
+     const fonctionnementNav = document.getElementById("fonctionnementNav");
     if (window.isLoggedIn === true || window.isLoggedIn === 'true') {
           const navBar = document.querySelector('.nav'); 
     if (navBar) {
@@ -37,6 +37,27 @@ export function initHeaderScripts() {
         homeLink.classList.add('nav-link');
         homeLink.style.animationDelay = '0s';
         navBar.insertBefore(homeLink, navBar.firstChild); 
+    }
+     if (navBar) {
+        const gestionCapteur = document.createElement('a');
+        gestionCapteur.href = '../Views/SensorPanel.php'; 
+        gestionCapteur.textContent = 'Espace de Gestion';
+        gestionCapteur.id = 'gestionCapteur';
+        gestionCapteur.classList.add('nav-link');
+        gestionCapteur.style.animationDelay = '0s';
+        navBar.insertBefore(gestionCapteur, fonctionnementNav); 
+        if(window.userRole === 'Utilisateur') {
+            gestionCapteur.style.display = 'none'; 
+        }
+
+    }
+    if (navBar) {
+        const gestionCompteur = document.createElement('a');
+        gestionCompteur.href = '../Views/capacite.php'; 
+        gestionCompteur.textContent = 'Gestion capacité';
+        gestionCompteur.classList.add('nav-link');
+        gestionCompteur.style.animationDelay = '0s';
+        navBar.insertBefore(gestionCompteur, fonctionnementNav); 
     }
         const link = document.querySelector('.inscription-link');
         if (link) {
@@ -51,7 +72,10 @@ export function initHeaderScripts() {
     if (loginButton) {
         loginButton.style.display = "none";
     }
+    
     }
+  
+
 
     // Effet bulle sur resize
     let resizeTimeout;
