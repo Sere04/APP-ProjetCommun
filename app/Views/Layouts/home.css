@@ -74,6 +74,19 @@ body {
     overflow: hidden;
 }
 
+/* Responsive : image sous le texte */
+@media (max-width: 900px) {
+    .title-section.justified-flex {
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 40px 0 20px 0;
+    }
+    .title-section.justified-flex img {
+        max-width: 90vw;
+        height: auto;
+    }
+}
+
 .title-section.justified-flex .content {
     flex: 1 1 0;
     text-align: justify;
@@ -188,7 +201,7 @@ body {
 }
 
 .dj-image {
-    max-width: 340px;
+    max-width: 600px;
     width: 100%;
     height: auto;
     border-radius: 32px;
