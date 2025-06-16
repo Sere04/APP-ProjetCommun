@@ -62,7 +62,7 @@ export function initHeaderScripts() {
         const link = document.querySelector('.inscription-link');
         if (link) {
             link.textContent ="Se déconnecter";
-            link.href = "../Controllers/logout.php";
+            link.href = "../Controllers/logOut.php";
             link.classList.add("logout-link"); 
             link.addEventListener('click', (e) => {
             alert("Vous vous êtes déconnecté.");
