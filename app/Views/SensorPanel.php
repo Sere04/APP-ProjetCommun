@@ -67,15 +67,18 @@ if (!isset($_SESSION['Permission']) || $_SESSION['Permission'] === 'Utilisateur'
         initHeaderScripts();
         document.getElementById('footer').innerHTML = renderFooter();
 
-        document.addEventListener('DOMContentLoaded', () => {
-    if (window.userRole === 'Administrateur') {
-        //ICI accés complet
-    } else (window.userRole === 'Modérateur') {
-        //on masque les utiliateurs
-        const userSection = document.querySelector('section:nth-of-type(2)');
-        if (userSection) userSection.style.display = 'none';
-    } 
-});
+
+    document.addEventListener('DOMContentLoaded', () => {
+        if (window.userRole === 'Administrateur') {
+            // Accès complet
+        } else if (window.userRole === 'Modérateur') {
+            // On masque la section des utilisateurs
+            const userSection = document.querySelector('section:nth-of-type(2)');
+            if (userSection) userSection.style.display = 'none';
+        } else {
+            window.location.href = 'home.php';
+        }
+    });
         // --- Capteurs dynamiques ---
         let capteursData = [];
         let chart = null;
