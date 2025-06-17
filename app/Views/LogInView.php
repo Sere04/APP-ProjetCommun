@@ -1,17 +1,17 @@
 <?php
-?>
-<?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 if (isset($_SESSION['login_required']) && $_SESSION['login_required'] === true) {
     echo "<script>alert('Il faut se connecter pour accéder à la page');</script>";
-    unset($_SESSION['login_required']); 
 }
 ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Inscription</title>
+    <title>Connexion</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 <link rel="stylesheet" href="../Views/Layouts/LogInCSS.css">
