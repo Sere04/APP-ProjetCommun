@@ -11,6 +11,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+            <div id="header"></div>
+
 <div class="legal-page-container">
     <h1>Fonctionnement du site</h1>
 
@@ -71,7 +73,10 @@
 <div id="footer"></div>
 
 <script type="module">
+    import { renderHeader, initHeaderScripts } from '/APP-ProjetCommun/app/Views/components/header.js';
     import { renderFooter } from '/APP-ProjetCommun/app/Views/components/footer.js';
+    document.getElementById('header').innerHTML = renderHeader();
+        initHeaderScripts();
     document.getElementById('footer').innerHTML = renderFooter();
 </script>
 </body>
