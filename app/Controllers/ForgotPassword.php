@@ -15,6 +15,8 @@ if (isset($_POST) && isset($_POST['email'])) {
     } else {
     $token = bin2hex(random_bytes(16));
     $resetLink = "https://pulsewave.leroymeunier.fr/APP-ProjetCommun/app/Controllers/resetPassword.php?token=" . urlencode($token);
+        // $resetLink = "http://localhost/APP-ProjetCommun/app/Controllers/resetPassword.php?token=" . urlencode($token);
+
 
 
     $mail = new PHPMailer(true);
