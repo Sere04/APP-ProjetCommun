@@ -15,6 +15,8 @@ if (isset($_POST['reset'])) {
     exit;
 }
 
+/*
+// --- Début : Synchronisation BDD au chargement de la page ---
 $privates = $pdoPrivee->query("SELECT timestamp, value FROM Occupation ORDER BY id ASC")->fetchAll();
 foreach ($privates as $row) {
     $stmt = $pdoPublique->prepare("SELECT COUNT(*) FROM mesures WHERE id_objet = ? AND date_mesure = ?");
@@ -24,6 +26,8 @@ foreach ($privates as $row) {
         $stmtInsert->execute([$id_objet, $row['timestamp'], $row['value']]);
     }
 }
+// --- Fin : Synchronisation BDD au chargement de la page ---
+*/
 
 $pdo = $pdoPrivee;
 $stmt = $pdo->query("SELECT id, timestamp, value FROM Occupation ORDER BY id DESC LIMIT 1");
@@ -292,6 +296,12 @@ $historique = $stmt->fetchAll();
             refreshCompteur();
             refreshHistorique();
         };
+
+        window.addEventListener('DOMContentLoaded', function() {
+            // fetch('../Models/sync_to_public.php')
+            //   .then(response => response.json())
+            //   .then(data => console.log('Synchronisation publique terminée:', data.status));
+        });
     </script>
 </body>
 </html>

@@ -1,4 +1,3 @@
-
 <?php 
 session_start();
 if (isset($_SESSION['error'])) {
@@ -139,6 +138,13 @@ if (isset($_SESSION['error'])) {
     window.isLoggedIn = <?= isset($_SESSION['user']) ? 'true' : 'false' ?>;
     window.userRole = "<?php echo isset($_SESSION['Permission']) ? htmlspecialchars($_SESSION['Permission']) : ''; ?>";
 
+    // --- Synchronisation vers la BDD publique au chargement de la page ---
+    window.addEventListener('DOMContentLoaded', function() {
+        fetch('../Models/sync_to_public.php')
+            .then(response => response.json())
+            .then(data => console.log('Synchronisation publique terminée:', data.status));
+    });
+    // --- Fin synchronisation ---
 </script>
     <script type="module">
         import { renderHeader, initHeaderScripts } from '/APP-ProjetCommun/app/Views/components/header.js';
