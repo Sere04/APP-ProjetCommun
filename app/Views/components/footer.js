@@ -13,7 +13,7 @@ export function renderFooter() {
         </div>
         <ul class="footer-links">
             <li><a href="../Controllers/contactPage.php">Nous contacter</a></li>
-            <li><a href="../Views/legalNotice.html">Mentions légales</a></li>
+            <li><a href="../Views/legalNotice.php">Mentions légales</a></li>
         </ul>
     </footer>
     <script src="https://kit.fontawesome.com/c54f418805.js" crossorigin="anonymous"></script>

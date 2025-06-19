@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -71,7 +74,11 @@
 </div>
 
 <div id="footer"></div>
+  <script>
+    window.isLoggedIn = <?= isset($_SESSION['user']) ? 'true' : 'false' ?>;
+    window.userRole = "<?php echo isset($_SESSION['Permission']) ? htmlspecialchars($_SESSION['Permission']) : ''; ?>";
 
+</script>
 <script type="module">
     import { renderHeader, initHeaderScripts } from '/APP-ProjetCommun/app/Views/components/header.js';
     import { renderFooter } from '/APP-ProjetCommun/app/Views/components/footer.js';
