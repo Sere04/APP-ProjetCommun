@@ -260,7 +260,7 @@ $historique = $stmt->fetchAll();
         }
 
         function refreshCompteur() {
-            fetch('get_capacite.php')
+            fetch('../Models/get_capacite.php')
                 .then(response => response.json())
                 .then(data => {
                     document.getElementById('compteur').textContent = data.compteur;
@@ -269,7 +269,7 @@ $historique = $stmt->fetchAll();
         }
 
         function refreshHistorique() {
-            fetch('get_historique.php')
+            fetch('../Models/get_historique.php')
                 .then(response => response.json())
                 .then(historique => {
                     let tbody = document.getElementById('hist-body');
