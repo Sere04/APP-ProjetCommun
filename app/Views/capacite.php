@@ -52,8 +52,9 @@ $historique = $stmt->fetchAll();
         display: flex;
         flex-direction: column;
         padding: 1rem 0;
-        overflow: hidden;
-    }
+        overflow-x : hidden;
+        }
+    
 
    .background-circle {
             position: absolute;

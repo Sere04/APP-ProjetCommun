@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -12,6 +15,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+        <div id="header"></div>
+
 <div class="legal-page-container">
     <h1>Mentions légales</h1>
 
@@ -82,9 +87,18 @@
     </div>
 </div>
 <div id="footer"></div>
+  <script>
+    window.isLoggedIn = <?= isset($_SESSION['user']) ? 'true' : 'false' ?>;
+    window.userRole = "<?php echo isset($_SESSION['Permission']) ? htmlspecialchars($_SESSION['Permission']) : ''; ?>";
 
+</script>
     <script type="module">
+        import { renderHeader, initHeaderScripts } from '/APP-ProjetCommun/app/Views/components/header.js';
         import { renderFooter } from '/APP-ProjetCommun/app/Views/components/footer.js';
+        
+        document.getElementById('header').innerHTML = renderHeader();
+        initHeaderScripts();
+
         document.getElementById('footer').innerHTML = renderFooter();
     </script>
 </body>
