@@ -40,7 +40,7 @@ if (isset($_POST) && count($_POST) > 0) {
             $hashedPassword = hashPassword($motDePasse);
             $result = updatePassword($pseudonymeOuMail, $hashedPassword);
            if ($result) {
-                $_SESSION['success'] = "Inscription réussie ! Veuillez vérifier votre email pour valider votre compte.";
+                $_SESSION['success'] = "Modification réussie !";
 
                     echo "<script>alert('Modification réussie ! '); window.location.href = '../Views/home.php';</script>";
                     exit();

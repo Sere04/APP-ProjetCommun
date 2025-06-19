@@ -14,7 +14,7 @@ if (isset($_POST) && isset($_POST['email'])) {
         $errors['email'] = "Veuillez saisir une adresse email valide.";
     } else {
     $token = bin2hex(random_bytes(16));
-    $resetLink = "http://localhost/APP-ProjetCommun/app/Controllers/resetPassword.php?token=" . urlencode($token);
+    $resetLink = "https://pulsewave.leroymeunier.fr/APP-ProjetCommun/app/Controllers/resetPassword.php?token=" . urlencode($token);
 
 
     $mail = new PHPMailer(true);
