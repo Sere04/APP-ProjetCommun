@@ -1,3 +1,5 @@
+
+import { showSideAlert } from '../components/alert.js';
 export function renderHeader() {
     return `
     <link rel="stylesheet" href="/app/Views/components/header.css">
@@ -31,14 +33,14 @@ export function initHeaderScripts() {
      const fonctionnementNav = document.getElementById("fonctionnementNav");
     if (window.isLoggedIn === true || window.isLoggedIn === 'true') {
           const navBar = document.querySelector('.nav'); 
-    if (navBar) {
+    /*if (navBar) {
         const homeLink = document.createElement('a');
         homeLink.href = '../Views/home.php'; 
         homeLink.textContent = 'Accueil';
         homeLink.classList.add('nav-link');
         homeLink.style.animationDelay = '0s';
         navBar.insertBefore(homeLink, navBar.firstChild); 
-    }
+    } */
      if (navBar) {
         const gestionCapteur = document.createElement('a');
         gestionCapteur.href = '../Views/SensorPanel.php'; 
@@ -66,7 +68,7 @@ export function initHeaderScripts() {
             link.href = "../Controllers/logOut.php";
             link.classList.add("logout-link"); 
             link.addEventListener('click', (e) => {
-            alert("Vous vous êtes déconnecté.");
+            showSideAlert("Vous vous êtes déconnecté.");
         });
         }
          const loginButton = document.querySelector('.connection-link');

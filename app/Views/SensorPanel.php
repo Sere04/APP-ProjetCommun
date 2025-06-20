@@ -25,6 +25,9 @@ if (!isset($_SESSION['Permission']) || $_SESSION['Permission'] === 'Utilisateur'
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+    <div id="global-loader" style="display:none;position:fixed;z-index:9999;top:0;left:0;width:100vw;height:100vh;background:rgba(255,255,255,0.7);justify-content:center;align-items:center;">
+        <img src="../../assets/images/loader.gif" alt="Chargement..." style="width:64px;height:64px;">
+    </div>
     <div id="header"></div>
     <section class="main-content">
         <section class="sensor-panel-section">
@@ -62,6 +65,8 @@ if (!isset($_SESSION['Permission']) || $_SESSION['Permission'] === 'Utilisateur'
     <script type="module">
         import { renderHeader, initHeaderScripts } from '/APP-ProjetCommun/app/Views/components/header.js';
         import { renderFooter } from '/APP-ProjetCommun/app/Views/components/footer.js';
+        import { showSideAlert } from './components/alert.js';
+        import { showSideSuccess } from './components/alert.js';
 
         document.getElementById('header').innerHTML = renderHeader();
         initHeaderScripts();
@@ -85,10 +90,12 @@ if (!isset($_SESSION['Permission']) || $_SESSION['Permission'] === 'Utilisateur'
         let currentSensorId = null;
 
         async function fetchCapteursStats() {
+            showLoader();
             const res = await fetch('../Models/Get_Capteur_Stats.php');
             capteursData = await res.json();
             renderSensorButtons();
             if (capteursData.length > 0) showSensorGraph(capteursData[0].id_objet);
+            hideLoader();
         }
 
         function renderSensorButtons() {
@@ -210,16 +217,23 @@ if (!isset($_SESSION['Permission']) || $_SESSION['Permission'] === 'Utilisateur'
             }
             if (e.target.id === 'btn-restore') {
                 if (!currentSensorId) return;
-                if (confirm("Restaurer la dernière backup ? Les données actuelles seront remplacées.")) {
-                    const res = await fetch('../Models/Restore_Capteur.php?id=' + currentSensorId);
-                    const data = await res.json();
-                    alert(data.message);
-                    fetchCapteursStats();
-                    updateBackupButtons();
-                }
+                showModalConfirm(
+                    "Restaurer la dernière backup ?",
+                    "Les données actuelles seront remplacées.",
+                    async () => {
+                        closeModal();
+                        showLoader();
+                        const res = await fetch('../Models/Restore_Capteur.php?id=' + currentSensorId);
+                        const data = await res.json();
+                        hideLoader();
+                        showSideSuccess(data.message);
+                        fetchCapteursStats();
+                        updateBackupButtons();
+                        closeModal();
+                    }
+                );
             }
         });
-
         // --- Gestion utilisateurs ---
         const userTableContainer = document.getElementById('user-table-container');
         const permissionOptions = ['Utilisateur','Modérateur','Administrateur'];
@@ -285,7 +299,22 @@ if (!isset($_SESSION['Permission']) || $_SESSION['Permission'] === 'Utilisateur'
             if (!btn) return;
             const id = btn.dataset.id;
             if (btn.dataset.action === 'delete') {
-                if (confirm("Supprimer cet utilisateur ?")) {
+                if (showModalConfirm(
+                    "Supprimer cet utilisateur ?",
+                    "Êtes-vous sûr de vouloir supprimer cet utilisateur ? Cette action est irréversible.",
+                    async () => {
+                        await fetch('../Models/Manage_Users.php?action=delete', {
+                            method: 'POST',
+                            body: new URLSearchParams({id}),
+                            headers: {'Content-Type':'application/x-www-form-urlencoded'}
+                        });
+                        closeModal();
+                        showLoader();
+                        fetchUsers();
+                        closeModal(); }
+                
+                )
+            ) {
                     await fetch('../Models/Manage_Users.php?action=delete', {
                         method: 'POST',
                         body: new URLSearchParams({id}),
@@ -296,7 +325,7 @@ if (!isset($_SESSION['Permission']) || $_SESSION['Permission'] === 'Utilisateur'
             }
             if (btn.dataset.action === 'save') {
                 // Les changements sont déjà auto-sauvegardés sur change, donc rien à faire ici
-                alert("Modifications sauvegardées !");
+                showSideAlert("Modifications sauvegardées !");
             }
             if (btn.dataset.action === 'changepass') {
                 showModalForm(
@@ -304,14 +333,17 @@ if (!isset($_SESSION['Permission']) || $_SESSION['Permission'] === 'Utilisateur'
                     `<input type="password" id="new-user-pass" placeholder="Nouveau mot de passe">`,
                     async () => {
                         const pass = document.getElementById('new-user-pass').value;
-                        if(pass.length<8) { alert("Mot de passe trop court"); return; }
+                        if(pass.length<8) { showSideAlert("Mot de passe trop court"); return; }
                         await fetch('../Models/Manage_Users.php?action=changepass', {
                             method: 'POST',
                             body: JSON.stringify({IDUser:id, motDePasse:pass}),
                             headers: {'Content-Type':'application/json'}
                         });
                         closeModal();
-                        alert("Mot de passe changé !");
+                        showLoader();
+                        showSideSuccess("Mot de passe changé !");
+                        hideLoader();
+                        
                     }
                 );
             }
@@ -338,7 +370,7 @@ if (!isset($_SESSION['Permission']) || $_SESSION['Permission'] === 'Utilisateur'
                         Permission: document.getElementById('add-perm').value
                     };
                     if (!data.firstName || !data.lastName || !data.mailUser || !data.userName || !data.motDePasse) {
-                        alert("Tous les champs obligatoires !");
+                        showSideAlert("Tous les champs obligatoires !");
                         return;
                     }
                     await fetch('../Models/Manage_Users.php?action=add', {
@@ -400,6 +432,13 @@ if (!isset($_SESSION['Permission']) || $_SESSION['Permission'] === 'Utilisateur'
             modal.querySelector('.validate').onclick = async () => {
                 await onValidate();
             };
+        }
+
+        function showLoader() {
+            document.getElementById('global-loader').style.display = 'flex';
+        }
+        function hideLoader() {
+            document.getElementById('global-loader').style.display = 'none';
         }
 
         fetchCapteursStats();
