@@ -311,6 +311,7 @@ if (!isset($_SESSION['Permission']) || $_SESSION['Permission'] === 'Utilisateur'
                         closeModal();
                         showLoader();
                         fetchUsers();
+                        hideLoader();
                         closeModal(); }
                 
                 )
