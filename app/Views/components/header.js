@@ -11,6 +11,7 @@ export function renderHeader() {
             <span></span>
         </button>
         <nav class="main-nav nav">
+            <a href="../Views/home.php" class="nav-link">Accueil</a>
             <a id="fonctionnementNav" href="/APP-ProjetCommun/app/Views/about.php" class="nav-link">Fonctionnement</a>
             <a href="../Controllers/contactPage.php" class="nav-link">Contact</a>
             <a href="../Controllers/LogIn.php" class="connection-link">Se Connecter</a>
