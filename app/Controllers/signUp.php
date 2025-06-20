@@ -90,7 +90,7 @@ if (isset($_POST) && count($_POST) > 0) {
         if ($validateEmail && $validatePhone && $validatePassword) {
             $hashedPassword = hashPassword($motDePasse);
             $token = bin2hex(random_bytes(16));
-            $validationLink = "https://pulsewave.leroymeunier.fr/APP-ProjetCommun/app/Controllers/validateMail.php?token=" . urlencode($token);
+            $validationLink = "https://pulsezone.leroymeunier.fr/APP-ProjetCommun/app/Controllers/validateMail.php?token=" . urlencode($token);
             $result = insertUser($prenom, $nom, $email, $pseudonyme, $hashedPassword, $telephone, $token);
            if ($result) {
                 $_SESSION['success'] = "Inscription réussie ! Veuillez vérifier votre email pour valider votre compte.";
