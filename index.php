@@ -1,9 +1,8 @@
 <?php
-// SUPPRIME ou commente le code de synchronisation ici
-// $private = new PDO(...);
-// $public = new PDO(...);
-// ... code de copie de la BDD ...
 
-header('Location: /APP-ProjetCommun/app/Views/home.php');
+header('Location: https://pulsezone.leroymeunier.fr/APP-ProjetCommun/app/Views/home.php');
 exit;
 ?>
+<script>
+window.location.href = "https://pulsezone.leroymeunier.fr/APP-ProjetCommun/app/Views/home.php";
+</script>
